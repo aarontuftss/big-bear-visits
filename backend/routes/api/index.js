@@ -6,11 +6,20 @@ const { restoreUser } = require('../../utils/auth.js');
 const { requireAuth } = require('../../utils/auth.js');
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
+const propertyRouter = require('./properties.js')
+const reservationRouter = require('./reservations.js');
+const supportRouter = require('./supports.js')
 
 
 router.use('/session', sessionRouter);
 
 router.use('/users', usersRouter);
+
+router.use('/properties', propertyRouter);
+
+router.use('/reservations', reservationRouter);
+
+router.use('/supports', supportRouter);
 
 
 router.get('/set-token-cookie', asyncHandler(async (_req, res) => {
