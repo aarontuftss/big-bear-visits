@@ -11,7 +11,7 @@ router.get(
     '/',
     asyncHandler(async (req, res) => {
         const properties = await Property.findAll({
-            include: [{ model: User }, { model: Image }, { model: Reservation }, {model: Support}],
+            // include: [{ model: User }, { model: Image }, { model: Reservation }, {model: Support}],
             order: [["createdAt", "DESC"]]
         });
 
@@ -27,7 +27,7 @@ router.get(
         const id = req.params.id;
         const property = await Property.findOne({
             where: { id: id },
-            include: [{ model: User }, { model: Image }, { model: Reservation }, { model: Support }],
+            // include: [{ model: User }, { model: Image }, { model: Reservation }, { model: Support }],
         });
 
         return res.json({
@@ -42,7 +42,7 @@ router.put(
         const id = req.params.id;
         const property = await Property.findOne({
             where: { id: id },
-            include: [{ model: User }, { model: Image }, { model: Reservation }, { model: Support }],
+            // include: [{ model: User }, { model: Image }, { model: Reservation }, { model: Support }],
         });
         if (property) {
             // await song.update(req.body);
@@ -59,7 +59,7 @@ router.delete(
         const id = req.params.id;
         const property = await Property.findOne({
             where: { id: id },
-            include: [{ model: User }, { model: Image }, { model: Reservation }, { model: Support }],
+            // include: [{ model: User }, { model: Image }, { model: Reservation }, { model: Support }],
         });
         if (property) {
             await property.destroy();
