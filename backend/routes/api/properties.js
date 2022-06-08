@@ -72,17 +72,17 @@ router.delete(
 router.post(
     '/',
     asyncHandler(async (req, res) => {
-        const { name, artistId, image, songUrl } = req.body;
+        // const { owner, artistId, image, songUrl } = req.body;
         //change above^  iterate images & create as well
         const newProp = await Property.create({
-            name,
-            artistId,
-            image,
-            songUrl
+            // name,
+            // artistId,
+            // image,
+            // songUrl
         });
 
         return res.json({
-            newSong,
+            newProp,
         });
     }),
 )
