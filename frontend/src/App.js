@@ -8,6 +8,9 @@ import Navigation from "./components/Navigation";
 
 import * as propertyActions from "./store/property"
 import NewProp from "./components/Forms/NewProp";
+import EditProp from "./components/Forms/EditProp";
+import NewReservation from "./components/Forms/NewReservation";
+import EditReservation from "./components/Forms/EditReservation";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,15 +50,15 @@ function App() {
           </Route>
           <Route path="/properties/:propertyId/edit" exact={true}>
             <h1>Edit Property Form</h1>
-          </Route>
-          <Route path="/reservations/:reservationId/edit" exact={true}>
-            <h1>Edit Reservation Form</h1>
+            <EditProp />
           </Route>
           <Route path="/reservations/new/:propertyId" exact={true}>
             <h1>New Reservation Form</h1>
+            <NewReservation />
           </Route>
           <Route path="/reservations/:reservationId" exact={true}>
             <h1>Personal Reservation Info & Support Submit Form</h1>
+            <EditReservation />
           </Route>
           <Route path="/about" exact={true}>
             <h1>About Page</h1>

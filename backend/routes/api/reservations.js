@@ -11,7 +11,7 @@ router.get(
     '/',
     asyncHandler(async (req, res) => {
         const reservations = await Reservation.findAll({
-            include: [{ model: User }, { model: Image }, { model: Property }, { model: Support }],
+            // include: [{ model: User }, { model: Image }, { model: Property }, { model: Support }],
             order: [["createdAt", "DESC"]]
         });
 
@@ -25,9 +25,10 @@ router.get(
     `/:id(\\d+)`,
     asyncHandler(async (req, res) => {
         const id = req.params.id;
+        console.log("***************** here", id)
         const reservation = await Reservation.findOne({
             where: { id: id },
-            include: [{ model: User }, { model: Image }, { model: Property }, { model: Support }],
+            // include: [{ model: User }, { model: Image }, { model: Property }, { model: Support }],
         });
 
         return res.json({
@@ -42,7 +43,7 @@ router.put(
         const id = req.params.id;
         const reservation = await Reservation.findOne({
             where: { id: id },
-            include: [{ model: User }, { model: Image }, { model: Property }, { model: Support }],
+            // include: [{ model: User }, { model: Image }, { model: Property }, { model: Support }],
         });
         if (reservation) {
             await reservation.update(req.body);
@@ -56,9 +57,9 @@ router.delete(
     `/:id(\\d+)`,
     asyncHandler(async (req, res) => {
         const id = req.params.id;
-        const reservation = await Property.findOne({
+        const reservation = await Reservation.findOne({
             where: { id: id },
-            include: [{ model: User }, { model: Image }, { model: Property }, { model: Support }],
+            // include: [{ model: User }, { model: Image }, { model: Property }, { model: Support }],
         });
         if (reservation) {
             await reservation.destroy();
@@ -72,7 +73,7 @@ router.post(
     '/',
     asyncHandler(async (req, res) => {
         const { propertyId, renterId, startDate, endDate } = req.body;
-        const newReservation = await Property.create({
+        const newReservation = await Reservation.create({
             propertyId, 
             renterId, 
             startDate, 

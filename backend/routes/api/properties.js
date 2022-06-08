@@ -45,9 +45,9 @@ router.put(
             // include: [{ model: User }, { model: Image }, { model: Reservation }, { model: Support }],
         });
         if (property) {
-            // await song.update(req.body);
-            // await song.save();
-            // res.json(song)
+            await property.update(req.body);
+            await property.save();
+            res.json(property)
             /* split req.body & update images as well */
         }
     }),
@@ -99,7 +99,10 @@ router.post(
             ownerId
         });
 
-        console.log(newProp.id)
+        const newImg = await Image.create({
+            propertyId: newProp.id,
+            link: imageUrl
+        })
 
         return res.json({
             newProp,

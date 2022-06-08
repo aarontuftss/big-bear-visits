@@ -26,7 +26,7 @@ const allReservationsAction = (reservations) => ({
 
 // GET ONE RESERVATION
 export const getOneReservation = (reservationId) => async (dispatch) => {
-    const response = await csrfFetch(`/api/reservations/${reservationId}`);
+    const response = await fetch(`/api/reservations/${reservationId}`);
 
     if (response.ok) {
         const reservation = await response.json();
