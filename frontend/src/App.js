@@ -22,11 +22,38 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route path="/login">
+          <Route path="/login" exact={true}>
             <LoginFormPage />
           </Route>
-          <Route path="/signup">
+          <Route path="/signup" exact={true}>
             <SignupFormPage />
+          </Route>
+          <Route path="/" exact={true}>
+            <h1>Welcome to my homepage</h1>
+          </Route>
+          <Route path="/search" exact={true}>
+            <h1>Browse Properties</h1>
+          </Route>
+          <Route path="/users/:userId" exact={true}>
+            <h1>Specific User Page</h1>
+          </Route>
+          <Route path="/properties/:propertyId" exact={true}>
+            <h1>Specific Property</h1>
+          </Route>
+          <Route path="/properties/new" exact={true}>
+            <h1>Create Property Form</h1>
+          </Route>
+          <Route path="/properties/:propertyId/edit" exact={true}>
+            <h1>Edit Property Form</h1>
+          </Route>
+          <Route path="/reservations/:reservationId/edit" exact={true}>
+            <h1>Edit Reservation Form</h1>
+          </Route>
+          <Route path="/reservations/new/:propertyId" exact={true}>
+            <h1>New Reservation Form</h1>
+          </Route>
+          <Route path="/reservations/:reservationId/" exact={true}>
+            <h1>Personal Reservation Info & Support Submit Form</h1>
           </Route>
         </Switch>
       )}
