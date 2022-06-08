@@ -1,3 +1,5 @@
+import { csrfFetch } from "./csrf";
+
 const GET_SUPPORTS = 'supports/GET';
 const GET_ONE_SUPPORT = 'support/GET/ONE';
 const NEW_SUPPORT = 'support/NEW';
@@ -7,7 +9,7 @@ const DELETE_SUPPORT = 'support/DELETE'
 // GET ALL SUPPORTS
 export const getAllSupports = () => async (dispatch) => {
 
-    const response = await fetch('/api/supports/')
+    const response = await csrfFetch('/api/supports/')
     if (response.ok) {
         const supports = await response.json();
         dispatch(allSupportsAction(supports));
@@ -24,7 +26,7 @@ const allSupportsAction = (supports) => ({
 
 // GET ONE SUPPORT
 export const getOneSupport = (supportId) => async (dispatch) => {
-    const response = await fetch(`/api/supports/${supportId}`);
+    const response = await csrfFetch(`/api/supports/${supportId}`);
 
     if (response.ok) {
         const support = await response.json();
@@ -42,7 +44,7 @@ const oneSupportAction = (support) => ({
 
 // POST NEW SUPPORT
 export const uploadNewSupport = (support) => async (dispatch) => {
-    const response = await fetch('/api/supports', {
+    const response = await csrfFetch('/api/supports', {
         method: "POST",
         headers: { "Content-Type": "application/json" }, // ****** MIGHT NEED TO COME BACK TO THIS
         body: JSON.stringify(support)
@@ -64,7 +66,7 @@ const newSupportAction = (support) => ({
 
 // EDIT A SUPPORT
 export const editSupport = (support) => async (dispatch) => {
-    const response = await fetch(`/api/supports/${support.id}`, {
+    const response = await csrfFetch(`/api/supports/${support.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" }, // ****** MIGHT NEED TO COME BACK TO THIS
         body: JSON.stringify(support)
@@ -86,7 +88,7 @@ const editSupportAction = (support) => ({
 
 // DELETE A SUPPORT
 export const deleteSupport = (supportId) => async (dispatch) => {
-    const response = await fetch(`/api/supports/${supportId}`, {
+    const response = await csrfFetch(`/api/supports/${supportId}`, {
         method: "DELETE"
     }); // DO WE NEED TO REMOVE CSRF?
 

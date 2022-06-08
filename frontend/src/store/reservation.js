@@ -1,3 +1,5 @@
+import { csrfFetch } from "./csrf";
+
 const GET_RESERVATIONS = 'reservations/GET';
 const GET_ONE_RESERVATION = 'reservation/GET/ONE';
 const NEW_RESERVATION = 'reservation/NEW';
@@ -7,7 +9,7 @@ const DELETE_RESERVATION = 'reservation/DELETE'
 // GET ALL RESERVATIONS
 export const getAllReservations = () => async (dispatch) => {
 
-    const response = await fetch('/api/reservations/')
+    const response = await csrfFetch('/api/reservations/')
     if (response.ok) {
         const reservations = await response.json();
         dispatch(allReservationsAction(reservations));
@@ -24,7 +26,7 @@ const allReservationsAction = (reservations) => ({
 
 // GET ONE RESERVATION
 export const getOneReservation = (reservationId) => async (dispatch) => {
-    const response = await fetch(`/api/reservations/${reservationId}`);
+    const response = await csrfFetch(`/api/reservations/${reservationId}`);
 
     if (response.ok) {
         const reservation = await response.json();
@@ -42,7 +44,7 @@ const oneReservationAction = (reservation) => ({
 
 // POST NEW RESERVATION
 export const uploadNewReservation = (reservation) => async (dispatch) => {
-    const response = await fetch('/api/reservations', {
+    const response = await csrfFetch('/api/reservations', {
         method: "POST",
         headers: { "Content-Type": "application/json" }, // ****** MIGHT NEED TO COME BACK TO THIS
         body: JSON.stringify(reservation)
@@ -64,7 +66,7 @@ const newReservationAction = (reservation) => ({
 
 // EDIT A RESERVATION
 export const editReservation = (reservation) => async (dispatch) => {
-    const response = await fetch(`/api/reservations/${reservation.id}`, {
+    const response = await csrfFetch(`/api/reservations/${reservation.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" }, // ****** MIGHT NEED TO COME BACK TO THIS
         body: JSON.stringify(reservation)
@@ -86,7 +88,7 @@ const editReservationAction = (reservation) => ({
 
 // DELETE A RESERVATION
 export const deleteReservation = (reservationId) => async (dispatch) => {
-    const response = await fetch(`/api/reservations/${reservationId}`, {
+    const response = await csrfFetch(`/api/reservations/${reservationId}`, {
         method: "DELETE"
     }); // DO WE NEED TO REMOVE CSRF?
 

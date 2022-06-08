@@ -1,3 +1,5 @@
+import { csrfFetch } from "./csrf";
+
 const GET_PROPERTIES = 'properties/GET';
 const GET_ONE_PROPERTY = 'property/GET/ONE';
 const NEW_PROPERTY = 'property/NEW';
@@ -7,7 +9,7 @@ const DELETE_PROPERTY = 'property/DELETE'
 // GET ALL PROPERTIES
 export const getAllProperties = () => async (dispatch) => {
 
-    const response = await fetch('/api/properties/')
+    const response = await csrfFetch('/api/properties/')
     if (response.ok) {
         const properties = await response.json();
         dispatch(allPropertiesAction(properties));
@@ -24,7 +26,7 @@ const allPropertiesAction = (properties) => ({
 
 // GET ONE PROPERTY
 export const getOneProperty = (propertyId) => async (dispatch) => {
-    const response = await fetch(`/api/properties/${propertyId}`);
+    const response = await csrfFetch(`/api/properties/${propertyId}`);
 
     if (response.ok) {
         const property = await response.json();
@@ -42,7 +44,7 @@ const onePropertyAction = (property) => ({
 
 // POST NEW PROPERTY
 export const uploadNewProperty = (property) => async (dispatch) => {
-    const response = await fetch('/api/properties', {
+    const response = await csrfFetch('/api/properties', {
         method: "POST",
         headers: { "Content-Type": "application/json" }, // ****** MIGHT NEED TO COME BACK TO THIS
         body: JSON.stringify(property)
@@ -64,7 +66,7 @@ const newPropertyAction = (property) => ({
 
 // EDIT A PROPERTY
 export const editProperty = (property) => async (dispatch) => {
-    const response = await fetch(`/api/properties/${property.id}`, {
+    const response = await csrfFetch(`/api/properties/${property.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" }, // ****** MIGHT NEED TO COME BACK TO THIS
         body: JSON.stringify(property)
@@ -86,7 +88,7 @@ const editPropertyAction = (property) => ({
 
 // DELETE A PROPERTY
 export const deleteProperty = (propertyId) => async (dispatch) => {
-    const response = await fetch(`/api/properties/${propertyId}`, {
+    const response = await csrfFetch(`/api/properties/${propertyId}`, {
         method: "DELETE"
     }); // DO WE NEED TO REMOVE CSRF?
 

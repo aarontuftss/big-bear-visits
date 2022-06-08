@@ -7,6 +7,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 
 import * as propertyActions from "./store/property"
+import NewProp from "./components/Forms/NewProp";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,11 +38,12 @@ function App() {
           <Route path="/users/:userId" exact={true}>
             <h1>Specific User Page</h1>
           </Route>
-          <Route path="/properties/:propertyId" exact={true}>
-            <h1>Specific Property</h1>
-          </Route>
           <Route path="/properties/new" exact={true}>
             <h1>Create Property Form</h1>
+            <NewProp />
+          </Route>
+          <Route path="/properties/:propertyId" exact={true}>
+            <h1>Specific Property</h1>
           </Route>
           <Route path="/properties/:propertyId/edit" exact={true}>
             <h1>Edit Property Form</h1>
@@ -52,8 +54,14 @@ function App() {
           <Route path="/reservations/new/:propertyId" exact={true}>
             <h1>New Reservation Form</h1>
           </Route>
-          <Route path="/reservations/:reservationId/" exact={true}>
+          <Route path="/reservations/:reservationId" exact={true}>
             <h1>Personal Reservation Info & Support Submit Form</h1>
+          </Route>
+          <Route path="/about" exact={true}>
+            <h1>About Page</h1>
+          </Route>
+          <Route path="*" exact={true}>
+            <h1>404 Page</h1>
           </Route>
         </Switch>
       )}
