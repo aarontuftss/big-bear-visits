@@ -13,10 +13,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     startDate: {
       allowNull: false,
-      type: DataTypes.DATE},
+      type: DataTypes.DATE
+    },
     endDate: {
       allowNull: false,
-      type: DataTypes.DATE}
+      type: DataTypes.DATE
+    }
   }, {});
   Reservation.associate = function(models) {
     // associations can be defined here
