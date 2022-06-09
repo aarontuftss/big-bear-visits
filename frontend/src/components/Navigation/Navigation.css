@@ -1,0 +1,98 @@
+.navBar {
+    width: 100%;
+    height: 10vh;
+    min-height: 80px;
+    top: 0;
+    position: sticky;
+    background-color: whitesmoke;
+    border-bottom: solid black 1px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow-y: none;
+    justify-content: space-around;
+    z-index: 5;
+}
+
+.logoHold{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo{
+    width: 100%;
+    height: 100%;
+    transform: translate(0px, 3px);
+}
+
+.logo1 {
+    width: 60px;
+    height: 60px;
+}
+
+.logoT{
+    text-decoration: none;
+}
+
+.navS{
+    min-width: 32vw;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.userBHold{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.userBHold > * {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.centerBook{
+    background-color: red;
+    min-width:fit-content;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 25px;
+    border: solid black 2px;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+}
+.mid{
+    min-width: max-content;
+}
+
+.mid > * {
+    text-decoration: none;
+}
+
+.centerBook > p {
+    color: whitesmoke;
+}
+
+.arrow1{
+    width: 40px;
+}
+
+.userBHold > * {
+    cursor: pointer;
+    /* padding-bottom: 5px; */
+    /* border-bottom: solid transparent 1px; */
+    /* box-sizing: border-box; */
+}
+
+.mid:hover{
+    cursor: pointer;
+    transform: translate(3px,0px);
+}
