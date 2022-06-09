@@ -25,10 +25,16 @@
 .rCardHold{
     width: 60vw;
     height: calc(90vh - 150px);
+    max-height: calc(90vh - 150px);
+    overflow-y: scroll;
     border: solid black 1px;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
+    max-width: 60vw;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
 
 .mapholder{
@@ -37,4 +43,17 @@
     border: solid black 1px;
     box-sizing: border-box;
 
+}
+
+.property1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 200px;
+    height: 200px;
+    border: solid black 1px;
+    margin: 25px;
+    border-radius: 15px;
 }

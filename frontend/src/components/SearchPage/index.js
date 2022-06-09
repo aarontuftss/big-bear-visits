@@ -49,7 +49,10 @@ function SearchPage() {
                     <div className='rCardHold'>
                         {Object.entries(properties).map((property)=> {
                             return (
-                                <div>{property[1].name}</div>
+                                <div className='property1'>
+                                    <h3>{property[1].name}</h3>
+                                    <h2>{property[1].price}</h2>
+                                </div>
                             )
                         })}
 
