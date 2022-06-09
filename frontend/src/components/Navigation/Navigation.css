@@ -87,12 +87,33 @@
 
 .userBHold > * {
     cursor: pointer;
-    /* padding-bottom: 5px; */
-    /* border-bottom: solid transparent 1px; */
-    /* box-sizing: border-box; */
+    text-decoration: none;
 }
 
 .mid:hover{
     cursor: pointer;
     transform: translate(3px,0px);
+}
+
+
+
+.uploadB{
+    border: solid transparent 1px;
+    box-sizing: border-box;
+    /* border-radius: 15px; */
+    color: black;
+}
+
+.uploadB:hover{
+    border-bottom: solid black 1px;
+}
+
+.profileB{
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: solid black 1px;
+    box-sizing: border-box;
+    border-radius: 7px;
 }

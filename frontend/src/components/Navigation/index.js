@@ -44,7 +44,7 @@ function Navigation({ isLoaded }) {
             <div className='navS'>
                 {isLoaded && sessionLinks}
             </div>
-            
+        
         </div>
         </>
     );
