@@ -13,6 +13,7 @@ import NewReservation from "./components/Forms/NewReservation";
 import EditReservation from "./components/Forms/EditReservation";
 import HomePage from "./components/HomePage";
 import SearchPage from "./components/SearchPage";
+import PropertyPage from "./components/PropertyPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -50,6 +51,7 @@ function App() {
           </Route>
           <Route path="/properties/:propertyId" exact={true}>
             <h1>Specific Property</h1>
+            <PropertyPage />
           </Route>
           <Route path="/properties/:propertyId/edit" exact={true}>
             <h1>Edit Property Form</h1>
