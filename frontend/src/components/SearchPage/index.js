@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import * as propertyActions from '../../store/property'
-import { Redirect } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import './SearchPage.css';
 
 function SearchPage() {
     const dispatch = useDispatch();
-    const sessionUser = useSelector(state => state.session.user);
-    const properties = useSelector(state => state.properties.allProperties)
+    const properties = useSelector(state => Object.entries(state.properties.allProperties))
+    const [filteredProp, setFilteredProp] = useState(properties)
 
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -18,7 +18,6 @@ function SearchPage() {
             .then(() => dispatch(propertyActions.getAllProperties()))
             .then(() => setIsLoaded(true));
     }, [dispatch]);
-    // console.log(properties)
 
     if (!isLoaded){
         return (
@@ -27,6 +26,15 @@ function SearchPage() {
                 <h1>Loading...</h1>
             </div>
             </>
+        )
+    }
+
+
+    function filter(){
+        setFilteredProp(
+            properties.filter((prop)=> {
+                return prop[1].id > 5
+            })
         )
     }
 
@@ -47,12 +55,14 @@ function SearchPage() {
                 <div className='resultHolder'>
 
                     <div className='rCardHold'>
-                        {Object.entries(properties).map((property)=> {
+                        {filteredProp.map((property)=> {
                             return (
-                                <div className='property1'>
-                                    <h3>{property[1].name}</h3>
-                                    <h2>{property[1].price}</h2>
-                                </div>
+                                <NavLink to={`/properties/${property[1].id}`}>
+                                    <div className='property1'>
+                                        <h3>{property[1].name}</h3>
+                                        <h2>{property[1].price}</h2>
+                                    </div>
+                                </NavLink>
                             )
                         })}
 
@@ -60,6 +70,7 @@ function SearchPage() {
 
                     <div className='mapholder'>
                         google maps api
+                        <button onClick={filter}>click</button>
                     </div>
 
                 </div>

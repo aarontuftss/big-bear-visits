@@ -52,7 +52,6 @@ function App() {
             <NewProp />
           </Route>
           <Route path="/properties/:propertyId" exact={true}>
-            <h1>Specific Property</h1>
             <PropertyPage />
           </Route>
           <Route path="/properties/:propertyId/edit" exact={true}>

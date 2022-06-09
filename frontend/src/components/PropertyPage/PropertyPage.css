@@ -1,0 +1,33 @@
+.propertyPage-main{
+    min-height: 85vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: maroon;
+}
+
+.propertyPage-main > div{
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    padding-top: 50px;
+    flex-direction: column;
+    border: solid black 1px;
+    background-color: whitesmoke;
+}
+
+.sect1{
+    min-width: 60vw;
+}
+
+.newResHolder{
+    min-width: 30vw;
+}
+
+.statHold{
+    width: 80%;
+    border: solid black 1px;
+    margin: 15px;
+    min-height: 200px;
+}

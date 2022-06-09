@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import * as sessionActions from '../../store/session';
+import * as propertyActions from '../../store/property';
 import * as reservationActions from '../../store/reservation';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { DateRange } from 'react-date-range';
-import NewReservation from '../Forms/NewReservation';
+import SimpleImageSlider from "react-simple-image-slider";
 
 import './PropertyPage.css';
 import 'react-date-range/dist/styles.css'; // main style file
@@ -14,10 +15,14 @@ function PropertyPage(props) {
     const dispatch = useDispatch();
     const history = useHistory()
     const [errors, setErrors] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(false)
+
     const sessionUser = useSelector(state => state.session.user);
+    const property = useSelector(state => state.properties.singleProperty.property);
 
     const location = window.location.href.split('/')
     const id = location[location.length - 1]
+    
 
     const [state, setState] = useState([
         {
@@ -26,6 +31,13 @@ function PropertyPage(props) {
             key: 'selection'
         }
     ]);
+
+    useEffect(() => {
+        dispatch(sessionActions.restoreUser())
+            .then(()=> dispatch(propertyActions.getOneProperty(id)))
+            .then(()=> dispatch(reservationActions.getAllReservations()))
+            .then(() => setIsLoaded(true));
+    }, [dispatch]);
 
     useEffect(()=> {
     }, [state])
@@ -46,13 +58,49 @@ function PropertyPage(props) {
 
     };
 
+    if(!isLoaded){
+        return (
+            <div className='loaderr'>
+                Loading...
+            </div>
+        )
+    }
 
+    if (!property.name) {
+        history.push('/search')
+    }
+
+    const images = property.Images.map((image) => {
+            return image.link
+        })
+    
 
 
     return (
         <>
+        {isLoaded && (
             <div className='propertyPage-main'>
+                <div className='sect1'>
+                    <h1>{property.name} - ${property.price}/night</h1>
+                    <SimpleImageSlider
+                        width={850}
+                        height={450}
+                        images={images}
+                        showBullets={true}
+                        showNavs={true}
+                    />
+                    <div className='statHold'>
+
+                    </div>
+                </div>
+
+                <div className='centerContent'>
+
+                </div>
+
                 <div className='newResHolder'>
+                    <h2>Book Your Stay at {property.name}</h2>
+                    <p>Check in : Check out</p>
                     <DateRange
                         editableDateInputs={true}
                         minDate={new Date()}
@@ -69,6 +117,7 @@ function PropertyPage(props) {
                     </form>
                 </div>
             </div>
+        )}
         </>
     )
 }
