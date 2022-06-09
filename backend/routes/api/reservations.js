@@ -11,7 +11,7 @@ router.get(
     '/',
     asyncHandler(async (req, res) => {
         const reservations = await Reservation.findAll({
-            // include: [{ model: User }, { model: Image }, { model: Property }, { model: Support }],
+            include: [{ model: Support }],
             order: [["createdAt", "DESC"]]
         });
 
@@ -25,10 +25,9 @@ router.get(
     `/:id(\\d+)`,
     asyncHandler(async (req, res) => {
         const id = req.params.id;
-        console.log("***************** here", id)
         const reservation = await Reservation.findOne({
             where: { id: id },
-            // include: [{ model: User }, { model: Image }, { model: Property }, { model: Support }],
+            include: [{ model: Support }],
         });
 
         return res.json({
@@ -43,7 +42,7 @@ router.put(
         const id = req.params.id;
         const reservation = await Reservation.findOne({
             where: { id: id },
-            // include: [{ model: User }, { model: Image }, { model: Property }, { model: Support }],
+            include: [{ model: Support }],
         });
         if (reservation) {
             await reservation.update(req.body);
@@ -59,7 +58,7 @@ router.delete(
         const id = req.params.id;
         const reservation = await Reservation.findOne({
             where: { id: id },
-            // include: [{ model: User }, { model: Image }, { model: Property }, { model: Support }],
+            include: [{ model: Support }],
         });
         if (reservation) {
             await reservation.destroy();

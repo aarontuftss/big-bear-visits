@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import * as reservationActions from "../../store/reservation"
 import './Forms.css';
 
 
-function NewReservation() {
+function NewReservation(props) {
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector((state) => state.session.user);
@@ -14,16 +14,16 @@ function NewReservation() {
     const id = location[location.length - 1]
 
     const [propertyId, setPropertyId] = useState(id);
-    const [renterId, setRenterId] = useState(sessionUser.id);
-    const [startDate, setStartDate] = useState("");
-    const [endDate, setEndDate] = useState("");
+    const [renterId, setRenterId] = useState(sessionUser? sessionUser.id : '');
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
 
     const [errors, setErrors] = useState([]);
 
-    if (!sessionUser) return <Redirect to="/login" />;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!sessionUser) history.push("/login")
         console.log()
 
         const data = {
@@ -62,6 +62,7 @@ function NewReservation() {
             </label>
             <button type="submit">Book Your Stay</button>
         </form>
+
     );
 }
 

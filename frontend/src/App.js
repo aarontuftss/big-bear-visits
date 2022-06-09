@@ -7,6 +7,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 
 import * as propertyActions from "./store/property"
+import * as reservationActions from "./store/reservation"
 import NewProp from "./components/Forms/NewProp";
 import EditProp from "./components/Forms/EditProp";
 import NewReservation from "./components/Forms/NewReservation";
@@ -21,6 +22,7 @@ function App() {
   useEffect(() => {
     dispatch(sessionActions.restoreUser())
     .then(()=> dispatch(propertyActions.getAllProperties()))
+    .then(() => dispatch(reservationActions.getAllReservations()))
     .then(() => setIsLoaded(true));
   }, [dispatch]);
 
