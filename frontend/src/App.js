@@ -12,6 +12,7 @@ import EditProp from "./components/Forms/EditProp";
 import NewReservation from "./components/Forms/NewReservation";
 import EditReservation from "./components/Forms/EditReservation";
 import HomePage from "./components/HomePage";
+import SearchPage from "./components/SearchPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ function App() {
             <HomePage />
           </Route>
           <Route path="/search" exact={true}>
-            <h1>Browse Properties</h1>
+            <SearchPage />
           </Route>
           <Route path="/users/:userId" exact={true}>
             <h1>Specific User Page</h1>
