@@ -51,9 +51,61 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
     border: solid black 1px;
     margin: 25px;
     border-radius: 15px;
+    background-color: maroon;
+    box-shadow: 1px 1px 2px 0px black;
+    transition: all 0.2s;
+}
+
+.property1 > * {
+    text-decoration: none;
+    color: white;
+    transition: all 0.2s;
+    margin: 5px;
+}
+
+.property1:hover {
+    background-color: whitesmoke;
+    color: black;
+    transform: translateY(5px)
+}
+
+.property1:hover >* {
+    color: black;
+}
+
+.cardImg{
+    width: 225px;
+    border-radius: 3px;
+    border: solid black 1px;
+}
+
+.statHolddd{
+    display: flex;
+    flex-direction: row;
+    padding-top: 0px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.statHolddd > * {
+    margin-top: 0px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.statHolddd > p{
+    background-color: whitesmoke;
+    color: black;
+    padding: 3px 5px 3px 5px;
+    border-radius: 7px;
+
+}
+
+*{
+    text-decoration: none;
 }

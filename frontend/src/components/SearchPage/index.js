@@ -4,6 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as propertyActions from '../../store/property'
 import { NavLink } from 'react-router-dom';
 
+import bedIcon from './bedIcon.png'
+import bathIcon from './bathIcon.png'
+import maxPpl from './maxPpl.png'
+
 import './SearchPage.css';
 
 function SearchPage() {
@@ -48,7 +52,6 @@ function SearchPage() {
                     <form>
                         <input type='date'></input>
                         <input type='date'></input>
-
                     </form>
                 </div>
 
@@ -56,11 +59,18 @@ function SearchPage() {
 
                     <div className='rCardHold'>
                         {filteredProp.map((property)=> {
+                            const image = property[1].Images[1].link ? property[1].Images[1].link : property[1].Images[0].link
                             return (
-                                <NavLink to={`/properties/${property[1].id}`}>
+                                <NavLink to={`/properties/${property[1].id}`} key={property[0]}>
                                     <div className='property1'>
-                                        <h3>{property[1].name}</h3>
-                                        <h2>{property[1].price}</h2>
+                                        <img alt='' className='cardImg' src={image}></img>
+                                        <h4>{property[1].name} - ${property[1].price}</h4>
+                                        <div className='statHolddd'>
+                                            <p>{property[1].bedrooms} Bed</p>
+                                            <p>{property[1].bathrooms} Bath</p>
+                                            <p>{property[1].maxGuests} Guests</p>
+
+                                        </div>
                                     </div>
                                 </NavLink>
                             )

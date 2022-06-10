@@ -7,6 +7,10 @@ import { useHistory } from 'react-router-dom';
 import { DateRange } from 'react-date-range';
 import SimpleImageSlider from "react-simple-image-slider";
 
+import bedIcon from './bedIcon.png'
+import bathIcon from './bathIcon.png'
+import maxPpl from './maxPpl.png'
+
 import './PropertyPage.css';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
@@ -89,15 +93,17 @@ function PropertyPage(props) {
                         showBullets={true}
                         showNavs={true}
                     />
-                    <div className='statHold'>
-
+                    <div className='descriptHold'>
+                        <div className='statHold'>
+                            <h2><img src={bedIcon} alt='' className='Picon'></img> {property.bedrooms} Bedrooms</h2>
+                            <h2><img src={bathIcon} alt='' className='Picon'></img> {property.bathrooms} Bathrooms</h2>
+                                <h2><img src={maxPpl} alt='' className='Picon1'></img> {property.maxGuests} Guests</h2>
+                        </div>
+                        <hr/>
+                        <h4>{property.description}</h4>
                     </div>
                 </div>
-
-                <div className='centerContent'>
-
-                </div>
-
+                
                 <div className='newResHolder'>
                     <h2>Book Your Stay at {property.name}</h2>
                     <p>Check in : Check out</p>
