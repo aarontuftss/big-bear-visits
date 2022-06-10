@@ -20,6 +20,7 @@
 
 .sect1{
     min-width: 60vw;
+    max-width: 60vw;
 }
 
 .sect1 > h1{
@@ -28,6 +29,7 @@
 
 .newResHolder{
     min-width: 30vw;
+    max-height: 30vw;
 }
 
 .newResHolder > h2{

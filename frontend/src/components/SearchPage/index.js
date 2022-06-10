@@ -19,8 +19,8 @@ function SearchPage() {
 
     useEffect(() => {
         dispatch(sessionActions.restoreUser())
-            .then(() => dispatch(propertyActions.getAllProperties()))
-            .then(() => setIsLoaded(true));
+        .then(() => dispatch(propertyActions.getAllProperties()))
+        .then(() => setIsLoaded(true));
     }, [dispatch]);
 
     if (!isLoaded){

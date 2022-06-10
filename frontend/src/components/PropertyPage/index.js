@@ -3,7 +3,7 @@ import * as sessionActions from '../../store/session';
 import * as propertyActions from '../../store/property';
 import * as reservationActions from '../../store/reservation';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { DateRange } from 'react-date-range';
 import SimpleImageSlider from "react-simple-image-slider";
 
@@ -61,6 +61,21 @@ function PropertyPage(props) {
             .then(() => history.push(`/users/${sessionUser.id}`))
 
     };
+
+    function handleEdit(){
+        history.push(`/properties/${property.id}/edit`)
+    }
+
+    async function handleDelete(e){
+        e.preventDefault();
+        const test = await dispatch(propertyActions.deleteProperty(property.id));
+        if (test){
+            history.push("/search");
+        }
+    
+        // .then(()=> dispatch(propertyActions.getAllProperties()))
+        // return <Redirect to={'/search'}/>
+    }
 
     if(!isLoaded){
         return (
@@ -121,6 +136,14 @@ function PropertyPage(props) {
 
                         <button type="submit">Book Your Stay</button>
                     </form>
+                    <div className='crudHold'>
+                        {sessionUser && sessionUser.id === property.ownerId &&(
+                            <>
+                                <button onClick={handleEdit}>Edit Property</button>
+                                <button onClick={handleDelete}>Delete Property</button>
+                            </>
+                        )}
+                    </div>
                 </div>
             </div>
         )}
