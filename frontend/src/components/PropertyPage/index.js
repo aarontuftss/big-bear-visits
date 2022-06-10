@@ -68,10 +68,9 @@ function PropertyPage(props) {
 
     async function handleDelete(e){
         e.preventDefault();
-        const test = await dispatch(propertyActions.deleteProperty(property.id));
-        if (test){
-            history.push("/search");
-        }
+        await dispatch(propertyActions.deleteProperty(property.id))
+            .then(()=> history.push("/search"))
+        
     
         // .then(()=> dispatch(propertyActions.getAllProperties()))
         // return <Redirect to={'/search'}/>
@@ -80,21 +79,21 @@ function PropertyPage(props) {
     if(!isLoaded){
         return (
             <div className='loaderr'>
-                Loading...
+                <h1>Loading...</h1>
             </div>
         )
     }
 
-    if (!property.name) {
-        history.push('/search')
-    }
+    // if (!property.name) {
+    //     history.push('/search')
+    // }
 
     const images = property.Images.map((image) => {
             return image.link
         })
     
 
-
+    console.log(props.test)
     return (
         <>
         {isLoaded && (

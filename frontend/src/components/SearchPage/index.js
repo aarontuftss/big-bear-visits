@@ -3,6 +3,9 @@ import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import * as propertyActions from '../../store/property'
 import { NavLink } from 'react-router-dom';
+import GoogleMapReact from 'google-map-react'
+import getCoord from './geocode';
+
 
 import bedIcon from './bedIcon.png'
 import bathIcon from './bathIcon.png'
@@ -13,9 +16,11 @@ import './SearchPage.css';
 function SearchPage() {
     const dispatch = useDispatch();
     const properties = useSelector(state => Object.entries(state.properties.allProperties))
-    const [filteredProp, setFilteredProp] = useState(properties)
+    const [filteredProp, setFilteredProp] = useState(useSelector(state => Object.entries(state.properties.allProperties)))
 
     const [isLoaded, setIsLoaded] = useState(false);
+
+    const Marker = ({ text }) => <div>{text}</div>;
 
     useEffect(() => {
         dispatch(sessionActions.restoreUser())
@@ -34,12 +39,45 @@ function SearchPage() {
     }
 
 
-    function filter(){
+    async function filter(){
         setFilteredProp(
             properties.filter((prop)=> {
                 return prop[1].id > 5
             })
         )
+        await filteredProp.map((p)=> {
+            getCoord(p.address, p.city, p.state)
+            
+        })
+        
+    }
+
+    function SimpleMap() {
+        const defaultProps = {
+            center: {
+                lat: 34.247569,
+                lng: -116.891459
+            },
+            zoom: 12.5
+        };
+
+        return (
+            // Important! Always set the container height explicitly
+            <div style={{ height: '100%', width: '100%' }}>
+                <GoogleMapReact
+                    bootstrapURLKeys={{
+                        key: process.env.GOOGLE_API }}
+                    defaultCenter={defaultProps.center}
+                    defaultZoom={defaultProps.zoom}
+                >
+                    <Marker
+                        lat={34.247569}
+                        lng={-116.891459}
+                        text="My Marker"
+                    />
+                </GoogleMapReact>
+            </div>
+        );
     }
 
 
@@ -79,8 +117,8 @@ function SearchPage() {
                     </div>
 
                     <div className='mapholder'>
-                        google maps api
                         <button onClick={filter}>click</button>
+                        <SimpleMap />
                     </div>
 
                 </div>
