@@ -1,9 +1,12 @@
-export default async function getCoord(address, city, state){
-    const addy = `${address}+${city}+${state}`
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${addy}&key=${process.env.GOOGLE_API}`;
-    let results = await fetch(url)
-    if (results.ok){
-        console.log(results.json())
-        // return results.json()
+export default async function getCoord(address, city, state, key){
+    const addy = `${address.split(' ').join('+')},+${city},+${state}`
+    const url1 = `https://maps.googleapis.com/maps/api/geocode/json?address=${addy}&key=${key}`
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=${key}`
+    const response = await fetch(url1)
+
+    if (response.ok) {
+        const data = await response.json();
+        const newAddy = data.results[0].geometry.location
+        return newAddy;
     }
 }

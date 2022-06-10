@@ -10,6 +10,7 @@ import SimpleImageSlider from "react-simple-image-slider";
 import bedIcon from './bedIcon.png'
 import bathIcon from './bathIcon.png'
 import maxPpl from './maxPpl.png'
+import loaderGif from './mapLoader.gif'
 
 import './PropertyPage.css';
 import 'react-date-range/dist/styles.css'; // main style file
@@ -49,7 +50,6 @@ function PropertyPage(props) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!sessionUser) history.push("/login")
-        console.log(state)
 
         const data = {
             propertyId: id,
@@ -79,7 +79,7 @@ function PropertyPage(props) {
     if(!isLoaded){
         return (
             <div className='loaderr'>
-                <h1>Loading...</h1>
+                <img src={loaderGif} alt=''></img>
             </div>
         )
     }
@@ -92,8 +92,6 @@ function PropertyPage(props) {
             return image.link
         })
     
-
-    console.log(props.test)
     return (
         <>
         {isLoaded && (

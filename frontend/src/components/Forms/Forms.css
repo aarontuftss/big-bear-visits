@@ -1,0 +1,39 @@
+.formm{
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+    align-items: center;
+    justify-content: center;
+    background-color: whitesmoke;
+    border-radius: 15px;
+    padding: 30px;
+    border: solid black 1px;
+    box-shadow: 3px 3px 2px 2px gray;
+}
+
+.formm > * {
+    margin: 5px;
+}
+
+.formWrap{
+    width: 100vw;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: maroon;
+}
+
+
+label{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: larger;
+}
+
+label > input, textarea{
+    width: 300px;
+}

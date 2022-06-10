@@ -7,6 +7,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 
 import * as propertyActions from "./store/property"
+import * as keyActions from './store/key'
 import * as reservationActions from "./store/reservation"
 import NewProp from "./components/Forms/NewProp";
 import EditProp from "./components/Forms/EditProp";
@@ -22,6 +23,7 @@ function App() {
   useEffect(() => {
     dispatch(sessionActions.restoreUser())
     .then(()=> dispatch(propertyActions.getAllProperties()))
+    .then(()=> dispatch(keyActions.getKey()))
     .then(() => dispatch(reservationActions.getAllReservations()))
     .then(() => setIsLoaded(true));
   }, [dispatch]);
@@ -38,7 +40,6 @@ function App() {
             <SignupFormPage />
           </Route>
           <Route path="/" exact={true}>
-            {/* <h1>Welcome to my homepage</h1> */}
             <HomePage />
           </Route>
           <Route path="/search" exact={true}>
@@ -48,14 +49,12 @@ function App() {
             <h1>Specific User Page</h1>
           </Route>
           <Route path="/properties/new" exact={true}>
-            <h1>Create Property Form</h1>
             <NewProp />
           </Route>
           <Route path="/properties/:propertyId" exact={true}>
             <PropertyPage />
           </Route>
           <Route path="/properties/:propertyId/edit" exact={true}>
-            <h1>Edit Property Form</h1>
             <EditProp />
           </Route>
           <Route path="/reservations/new/:propertyId" exact={true}>

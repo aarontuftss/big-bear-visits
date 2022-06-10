@@ -24,7 +24,6 @@ function NewReservation(props) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!sessionUser) history.push("/login")
-        console.log()
 
         const data = {
             propertyId: propertyId,

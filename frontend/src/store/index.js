@@ -5,13 +5,15 @@ import sessionReducer from './session';
 import propertyReducer from './property'
 import reservationReducer from './reservation'
 import supportReducer from './support'
+import keyReducer from "./key";
 
 const rootReducer = combineReducers({
   // add reducer functions here
   session: sessionReducer,
   properties: propertyReducer,
   reservations: reservationReducer,
-  supports: supportReducer
+  supports: supportReducer,
+  key: keyReducer
 });
 
 let enhancer;

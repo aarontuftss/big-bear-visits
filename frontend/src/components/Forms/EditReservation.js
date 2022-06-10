@@ -36,7 +36,6 @@ function EditReservation() {
     
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log()
 
         const data = {
             propertyId: currentRes.propertyId,

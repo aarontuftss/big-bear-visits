@@ -10,7 +10,7 @@ body{
 
 .loaderr {
     height: 90vh;
-    background-color: whitesmoke;
+    background-color: white;
     display: flex;
     align-items: center;
     justify-content: center;

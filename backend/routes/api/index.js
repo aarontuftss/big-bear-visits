@@ -9,6 +9,7 @@ const usersRouter = require('./users.js');
 const propertyRouter = require('./properties.js')
 const reservationRouter = require('./reservations.js');
 const supportRouter = require('./supports.js')
+const keyRouter = require('./key')
 
 
 router.use('/session', sessionRouter);
@@ -20,6 +21,8 @@ router.use('/properties', propertyRouter);
 router.use('/reservations', reservationRouter);
 
 router.use('/supports', supportRouter);
+
+router.use('/key', keyRouter);
 
 
 router.get('/set-token-cookie', asyncHandler(async (_req, res) => {
