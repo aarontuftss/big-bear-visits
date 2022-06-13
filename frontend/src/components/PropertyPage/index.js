@@ -27,6 +27,26 @@ function PropertyPage(props) {
 
     const location = window.location.href.split('/')
     const id = location[location.length - 1]
+
+    const [disabledDays, setDisabledDays] = useState([])
+
+
+    function inbetweens(start, end){
+        for (var arr = [], dt = new Date(start); dt <= new Date(end); dt.setDate(dt.getDate() + 1)) {
+            arr.push(new Date(dt));
+        }
+        console.log(arr)
+        return arr
+    }
+
+    useEffect(()=> {
+        if (property) {
+            setDisabledDays(property.Reservations.map((r) => {
+                return inbetweens(r.startDate, r.endDate)
+            }).flat())
+        }
+        
+    }, [])
     
 
     const [state, setState] = useState([
@@ -41,8 +61,15 @@ function PropertyPage(props) {
         dispatch(sessionActions.restoreUser())
             .then(()=> dispatch(propertyActions.getOneProperty(id)))
             .then(()=> dispatch(reservationActions.getAllReservations()))
+            .then(()=> {
+                setDisabledDays(property.Reservations.map((r) => {
+                    return inbetweens(r.startDate, r.endDate)
+                }))
+            })
             .then(() => setIsLoaded(true));
     }, [dispatch]);
+
+    console.log(disabledDays)
 
     useEffect(()=> {
     }, [state])

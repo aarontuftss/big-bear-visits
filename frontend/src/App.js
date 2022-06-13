@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Route, Switch, useParams } from "react-router-dom";
 import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
@@ -16,10 +16,15 @@ import EditReservation from "./components/Forms/EditReservation";
 import HomePage from "./components/HomePage";
 import SearchPage from "./components/SearchPage";
 import PropertyPage from "./components/PropertyPage";
+import UserPage from "./components/UserPage";
 
 function App() {
   const dispatch = useDispatch();
+  const sessionUser = useSelector((state) => state.session.user);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const { params } = useParams()
+
   useEffect(() => {
     dispatch(sessionActions.restoreUser())
     .then(()=> dispatch(propertyActions.getAllProperties()))
@@ -46,7 +51,7 @@ function App() {
             <SearchPage />
           </Route>
           <Route path="/users/:userId" exact={true}>
-            <h1>Specific User Page</h1>
+            <UserPage />
           </Route>
           <Route path="/properties/new" exact={true}>
             <NewProp />

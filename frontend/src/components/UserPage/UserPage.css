@@ -1,0 +1,150 @@
+.profileWrap{
+    min-height: calc(90vh - 70px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100vw;
+    background-color: whitesmoke;
+}
+
+.welcomeBanner{
+    height: 70px;
+    color: whitesmoke;
+    background-color: maroon;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcomeBanner > img {
+    width: 40px;
+    margin-left: 25px;
+    border: solid white 1px;
+    padding: 5px;
+    border-radius: 50%;
+}
+
+.top2{
+    min-width: 90vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-height: 800px;
+    height: 80vh;
+}
+
+.top2 > div{
+    width: 40vw;
+    min-width: 300px;
+    background-color: maroon;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    border: solid black 1px;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.topp{
+    height: 65%;
+    border: solid black 1px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: whitesmoke;
+    border-radius: 7px;
+}
+
+.bottomm{
+    height: 25%;
+    width: 90%;
+    border: solid black 1px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: whitesmoke;
+    border-radius: 7px;
+}
+
+.profileScroll{
+    height: 90%;
+    width: 100%;
+    border-top: solid black 1px;
+    padding-bottom: 10px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profileCard{
+    display: flex;
+    flex-direction: row;
+    background-color: whitesmoke;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    min-height: 200px;
+    color: black;
+    transition: all 0.3s;
+    cursor: pointer;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: solid transparent 1px;
+    /* transition: all 0.5s; */
+}
+
+.profileCard>div>h2 {
+    background-color: whitesmoke;
+    color: black;
+    box-sizing: border-box;
+    padding: 5px;
+    transition: all 0.5s;
+    border-radius: 7px;
+}
+
+/* .profileCard:hover >div>h2{
+    background-color: maroon;
+    color: white;
+} */
+
+.profileCard:hover {
+    border: solid black 1px;
+}
+
+.profileCard > img {
+    width: 45%;
+    border: solid black 1px;
+    border-radius: 5px;
+}
+
+.profileCard > div{
+    width: 45%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.profileCard>div>h2 {
+    margin: 0px;
+}
+.profileCard>div>div {
+    display: flex;
+    flex-direction: row;
+    border-radius: 3px;
+    padding: 0;
+    align-items: center;
+    justify-content: space-around;
+    width: 80%;
+}
+.profileCard>div>div>p>img {
+    width: 20px;
+}

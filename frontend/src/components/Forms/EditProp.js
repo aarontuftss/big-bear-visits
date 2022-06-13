@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect, useHistory, useParams } from "react-router-dom";
 import * as propertyActions from "../../store/property";
 import './Forms.css';
 
@@ -9,7 +9,12 @@ function EditProp() {
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector((state) => state.session.user);
-    const propertyInfo = useSelector((state) => state.properties.singleProperty.property)
+    const properties = useSelector((state) => state.properties.allProperties)
+    const { propertyId } = useParams()
+
+    const propertyInfo = Object.entries(properties).filter((p) => {
+        return p[1].id === parseInt(propertyId)
+    })
 
     const [price, setPrice] = useState('');
     const [name, setName] = useState('');
@@ -24,69 +29,63 @@ function EditProp() {
     const [images, setImages] = useState([]);
     const [errors, setErrors] = useState([]);
 
-    const location = window.location.href.split('/')
-    const id = location[location.length - 2]
 
     const [isLoaded, setIsLoaded] = useState(false)
 
-    useEffect(() => {
-        dispatch(propertyActions.getOneProperty(id))
-        // .then(()=> console.log(propertyInfo))
-        // .then(()=> {
-        //     if(sessionUser.id !== propertyInfo.ownerId){
-        //         return <Redirect to={`/`} />
-        //     }
-        // })
-        // .then(()=> {
-        //     setPrice(propertyInfo.price);
-        //     setName(propertyInfo.name);
-        //     setAddress(propertyInfo.address);
-        //     setCity(propertyInfo.city);
-        //     setState(propertyInfo.state);
-        //     setBedrooms(propertyInfo.bedrooms);
-        //     setBathrooms(propertyInfo.bathrooms);
-        //     setMaxGuests(propertyInfo.maxGuests);
-        //     setDescription(propertyInfo.description);
-        // })
-        // .then(()=> setIsLoaded(true))
-    }, []);
 
     useEffect(() => {
-        // console.log(propertyInfo)
+        pageSetup()
+    }, [])
 
-        // if (sessionUser.id !== propertyInfo.ownerId) {
-        //     history.push('/')
-        // }
-        // setPrice(propertyInfo.price);
-        // setName(propertyInfo.name);
-        // setAddress(propertyInfo.address);
-        // setCity(propertyInfo.city);
-        // setState(propertyInfo.state);
-        // setBedrooms(propertyInfo.bedrooms);
-        // setBathrooms(propertyInfo.bathrooms);
-        // setMaxGuests(propertyInfo.maxGuests);
-        // setDescription(propertyInfo.description);
-  
+    const validateErrors = () => {
+        let errors = []
+
+        let addresRegex = /^[0-9]* .*/g
+
+        console.log(city)
+
+
+        if (name.length > 100) errors.push('Name must be less than 100 characters')
+        if (!name.length || name === '') errors.push('Please provide a name')
+        if (!address.match(addresRegex)) errors.push('Please provide a valid address')
+        if (city.toLowerCase() !== 'big bear lake' && city.toLowerCase() !== 'big bear city') errors.push('Property must be in Big Bear Lake or Big Bear City')
+        if (state.toLowerCase() !== 'california') errors.push('Property must be in California')
+        if (bathrooms === '' || bedrooms === '' || maxGuests === '') errors.push('Please provide valid number of bedrooms, bathrooms, & guests')
+        if (description.length < 5) errors.push('Please provide a brief description')
+        if (description.length > 200) errors.push('Description must be less than 200 characters')
+        if (imageUrl === '') errors.push('Please provide an image')
+
+
+
+        return errors;
+    }
+
+    function pageSetup() {
+        console.log(propertyInfo[0][1])
+        if (sessionUser.id !== propertyInfo[0][1].ownerId) {
+            history.push('/search')
+        }
+        setPrice(propertyInfo[0][1].price);
+        setName(propertyInfo[0][1].name);
+        setAddress(propertyInfo[0][1].address);
+        setCity(propertyInfo[0][1].city);
+        setState(propertyInfo[0][1].state);
+        setBedrooms(propertyInfo[0][1].bedrooms);
+        setBathrooms(propertyInfo[0][1].bathrooms);
+        setMaxGuests(propertyInfo[0][1].maxGuests);
+        setDescription(propertyInfo[0][1].description);
         setIsLoaded(true)
-    }, [dispatch]);
+    }
+
 
     if (!sessionUser) return <Redirect to="/login" />;
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(name,
-            address,
-            city,
-            state,
-            bedrooms,
-            bathrooms,
-            maxGuests,
-            description,
-            imageUrl)
 
-        const propData = {
-            id: id,
+        const data = {
+            id: propertyId,
             ownerId: sessionUser.id,
             price: price,
             name: name,
@@ -97,10 +96,18 @@ function EditProp() {
             bathrooms: bathrooms,
             maxGuests: maxGuests,
             description: description,
+            imageUrl: imageUrl
         }
-        await dispatch(propertyActions.editProperty(propData))
-            .then(() => history.push(`/properties/${id}`))
 
+        let validations = validateErrors()
+
+        if (!validations.length) {
+            await dispatch(propertyActions.editProperty(data))
+                .then(() => history.push(`/properties/${propertyId}`))
+
+        } else {
+            setErrors(validations)
+        }
     };
 
     return (
