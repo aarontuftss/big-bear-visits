@@ -49,7 +49,7 @@ function EditReservation() {
         dispatch(reservationActions.getOneReservation(id))
         .then(() => dispatch(propertyActions.getOneProperty(propId)))
         .then(()=> {
-            property.Reservations.map((r) => {
+            property?.Reservations.map((r) => {
                 return inbetweens(r.startDate, r.endDate)
             })
         })
@@ -73,7 +73,7 @@ function EditReservation() {
         return arr
     }
 
-    const oof = property.Reservations.map((r) => {
+    const oof = property?.Reservations.map((r) => {
         return inbetweens(r.startDate, r.endDate)
     })
 

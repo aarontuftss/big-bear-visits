@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, NavLink } from 'react-router-dom';
 
 import './HomePage.css';
+import arrow from './arrow.png'
 
 function HomePage() {
     const dispatch = useDispatch();
@@ -14,11 +15,14 @@ function HomePage() {
         <>
         <div className='homePage-main'>
             <div className='mainBG'>
-                <form>
-                    <input type='date'></input>
-                    <input type='date'></input>
-                    <input type='number' placeholder='# of guests'></input>
-                </form>
+                <div className='mid'>
+                    <NavLink to={`/search`}>
+                        <div className='centerBook'>
+                            <p>Check Availability</p>
+                            <img src={arrow} alt='' className='arrow1'></img>
+                        </div>
+                    </NavLink>
+                </div>
                 <h2>Plan your next trip to beautiful Big Bear Lake, California</h2>
 
             </div>

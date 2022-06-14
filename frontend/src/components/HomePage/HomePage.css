@@ -59,3 +59,46 @@
 
 
 
+
+
+
+
+
+
+
+
+.centerBook {
+    background-color: maroon;
+    min-width: fit-content;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 25px;
+    border: solid black 2px;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+}
+
+.mid {
+    min-width: max-content;
+}
+
+.mid>* {
+    text-decoration: none;
+}
+
+.centerBook>p {
+    color: whitesmoke;
+}
+
+.arrow1 {
+    width: 40px;
+}
+
+.mid:hover {
+    cursor: pointer;
+    transform: translate(3px, 0px);
+}

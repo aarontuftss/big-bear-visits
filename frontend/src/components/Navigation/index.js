@@ -5,10 +5,10 @@ import ProfileButton from './ProfileButton';
 import './Navigation.css';
 import logo from './logooo.png'
 import logo1 from './logo1.png'
-import arrow from './arrow.png'
 
 function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
+    const weather = useSelector(state => state.weather.current)
 
     let sessionLinks;
     if (sessionUser) {
@@ -32,16 +32,14 @@ function Navigation({ isLoaded }) {
                 <NavLink exact to="/"><img src={logo} alt='' className='logo'></img></NavLink>
             </div>
 
-            <div className='mid'>
-                <NavLink to={`/search`}>
-                <div className='centerBook'>
-                    <p>Check Availability</p>
-                    <img src={arrow} alt='' className='arrow1'></img>
-                </div>
-                </NavLink>
+            <div className='navMid'>
+                <img src={weather?.condition.icon} alt=''></img>
+                <h2>{weather?.condition.text}</h2>
+                <h2>{weather?.temp_f}℉</h2>
             </div>
 
             <div className='navS'>
+                <NavLink to={`/search`}> Search </NavLink>
                 {isLoaded && sessionLinks}
             </div>
         

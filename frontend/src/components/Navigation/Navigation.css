@@ -41,6 +41,7 @@
     text-align: center;
     align-items: center;
     justify-content: center;
+    display: flex;
 }
 
 .userBHold{
@@ -55,44 +56,9 @@
     margin-right: 15px;
 }
 
-.centerBook{
-    background-color: maroon;
-    min-width:fit-content;
-    color: white;
-    display: flex;
-    flex-direction: row;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 25px;
-    border: solid black 2px;
-    box-sizing: border-box;
-    align-items: center;
-    justify-content: center;
-}
-.mid{
-    min-width: max-content;
-}
-
-.mid > * {
-    text-decoration: none;
-}
-
-.centerBook > p {
-    color: whitesmoke;
-}
-
-.arrow1{
-    width: 40px;
-}
-
 .userBHold > * {
     cursor: pointer;
     text-decoration: none;
-}
-
-.mid:hover{
-    cursor: pointer;
-    transform: translate(3px,0px);
 }
 
 
@@ -116,4 +82,16 @@
     border: solid black 1px;
     box-sizing: border-box;
     border-radius: 7px;
+}
+
+
+.navMid{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.navMid > * {
+    margin: 7px;
 }
