@@ -5,6 +5,11 @@ import { Redirect, NavLink } from 'react-router-dom';
 
 import './HomePage.css';
 import arrow from './arrow.png'
+import bgVid from './BigBearSpringBanner.mp4'
+import cabin from './cabin.png'
+import money from './money.png'
+import fun from './fun.png'
+import about from './about.png'
 
 function HomePage() {
     const dispatch = useDispatch();
@@ -14,42 +19,43 @@ function HomePage() {
     return (
         <>
         <div className='homePage-main'>
+            <video src={bgVid} autoPlay loop muted className='bgVidd'/>
             <div className='mainBG'>
                 <div className='mid'>
                     <NavLink to={`/search`}>
                         <div className='centerBook'>
-                            <p>Check Availability</p>
+                            <h2>Check Availability</h2>
                             <img src={arrow} alt='' className='arrow1'></img>
                         </div>
                     </NavLink>
                 </div>
-                <h2>Plan your next trip to beautiful Big Bear Lake, California</h2>
+                <h1>Plan your next trip to beautiful Big Bear Lake, California</h1>
 
             </div>
             <div className='homeCardContainer'>
-                <div className='homeCard'>
-                    <img  src={''} alt=''></img>
-                    <p>test</p>
-                    <p>test</p>
-                </div>
+                <NavLink to={'/search'}><div className='homeCard'>
+                    <img  src={cabin} alt=''></img>
+                    <p>Create the Perfect Vacation</p>
+                    <p>Browse & filter through all properties.. Find exactly what you need.</p>
+                    </div></NavLink>
 
-                <div className='homeCard'>
-                    <img src={''} alt=''></img>
-                    <p>test</p>
-                    <p>test</p>
-                </div>
+                <NavLink to={`/properties/new`}><div className='homeCard'>
+                    <img src={money} alt=''></img>
+                    <p>Upload A Property</p>
+                    <p>Rent your home on our platform & help create new memories for visitors!</p>
+                    </div></NavLink>
 
-                <div className='homeCard'>
-                    <img src={''} alt=''></img>
-                    <p>test</p>
-                    <p>test</p>
-                </div>
+                    <a href={'https://www.bigbear.com/things-to-do/summer/'} target='_blank'><div className='homeCard'>
+                    <img src={fun} alt=''></img>
+                    <p>Things To Do</p>
+                    <p>Browse Big Bear's official website for a list of summer activities going on</p>
+                </div></a>
 
-                <div className='homeCard'>
-                    <img src={''} alt=''></img>
-                    <p>test</p>
-                    <p>test</p>
-                </div>
+                <NavLink to={'/about'}><div className='homeCard'>
+                    <img src={about} alt=''></img>
+                    <p>About</p>
+                    <p>Hi, learn about the developer & this project. Thank you for visiting !</p>
+                    </div></NavLink>
 
             </div>
 
