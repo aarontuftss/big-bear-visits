@@ -28,11 +28,12 @@ function PropertyPage(props) {
     const location = window.location.href.split('/')
     const id = location[location.length - 1]
 
-    const [disabledDays, setDisabledDays] = useState([])
+    const [disabled, setDisabled] = useState([])
 
 
     function inbetweens(start, end){
         for (var arr = [], dt = new Date(start); dt <= new Date(end); dt.setDate(dt.getDate() + 1)) {
+            disabled.push(new Date(dt))
             arr.push(new Date(dt));
         }
         console.log(arr)
@@ -40,11 +41,11 @@ function PropertyPage(props) {
     }
 
     useEffect(()=> {
-        if (property) {
-            setDisabledDays(property.Reservations.map((r) => {
-                return inbetweens(r.startDate, r.endDate)
-            }).flat())
-        }
+        // if (property) {
+        //     setDisabled(property.Reservations.map((r) => {
+        //         return inbetweens(r.startDate, r.endDate)
+        //     }))
+        // }
         
     }, [])
     
@@ -62,17 +63,19 @@ function PropertyPage(props) {
             .then(()=> dispatch(propertyActions.getOneProperty(id)))
             .then(()=> dispatch(reservationActions.getAllReservations()))
             .then(()=> {
-                setDisabledDays(property.Reservations.map((r) => {
+                property.Reservations.map((r) => {
                     return inbetweens(r.startDate, r.endDate)
-                }))
+                })
             })
             .then(() => setIsLoaded(true));
     }, [dispatch]);
 
-    console.log(disabledDays)
 
     useEffect(()=> {
     }, [state])
+
+
+    console.log(disabled)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -95,12 +98,10 @@ function PropertyPage(props) {
 
     async function handleDelete(e){
         e.preventDefault();
+        console.log(property.id)
         await dispatch(propertyActions.deleteProperty(property.id))
-            .then(()=> history.push("/search"))
-        
-    
-        // .then(()=> dispatch(propertyActions.getAllProperties()))
-        // return <Redirect to={'/search'}/>
+        .then(() => dispatch(propertyActions.getAllProperties()))
+        history.push(`/users/${sessionUser.id}`)
     }
 
     if(!isLoaded){
@@ -152,6 +153,7 @@ function PropertyPage(props) {
                         onChange={item => {setState([item.selection]);}}
                         moveRangeOnFirstSelection={false}
                         ranges={state}
+                        disabledDates={[...disabled]}
                     />
                     <form onSubmit={handleSubmit}>
                         <ul>

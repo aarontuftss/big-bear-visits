@@ -7,19 +7,16 @@ import getCoord from './geocode';
 
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
-
-import bedIcon from './bedIcon.png'
-import bathIcon from './bathIcon.png'
-import maxPpl from './maxPpl.png'
 import loaderGif from './mapLoader.gif'
 
 import './SearchPage.css';
 
 function SearchPage() {
     const dispatch = useDispatch();
-    const properties = useSelector(state => Object.entries(state.properties.allProperties))
-    const [filteredProp, setFilteredProp] = useState(useSelector(state => Object.entries(state.properties.allProperties)))
+    const properties = useSelector(state => state.properties.allProperties)
+    const [filteredProp, setFilteredProp] = useState(properties)
     const key = useSelector(state => state.key)
+
 
     const history = useHistory()
 
@@ -30,20 +27,23 @@ function SearchPage() {
     useEffect(() => {
         dispatch(sessionActions.restoreUser())
         .then(() => dispatch(propertyActions.getAllProperties()))
-        // .then(() => setIsLoaded(true));
+        // .then(()=> setFilteredProp(properties))
+        .then(() => gg())
+        .then(()=> setIsLoaded(true))
     }, [dispatch]);
 
-
+    console.log(properties)
     async function gg(){
-        for(let i = 0; i < filteredProp.length; i++){
-            filteredProp[i][1]['coordinates'] = await getCoord(filteredProp[i][1].address, filteredProp[i][1].city, filteredProp[i][1].state, key)
+        for(let i = 0; i < Object.entries(properties).length; i++){
+            let index = Object.entries(properties)
+            index[i][1]['coordinates'] = await getCoord(index[i][1].address, index[i][1].city, index[i][1].state, key)
         }
     }
 
-    useEffect(() => {
-        gg()
-        .then(() => setIsLoaded(true));
-    }, []);
+    // useEffect(() => {
+    //     gg()
+    //     .then(() => setIsLoaded(true));
+    // }, []);
 
 
 
@@ -62,14 +62,14 @@ function SearchPage() {
     }
 
 
-    async function filter(){
-        setFilteredProp(
-            properties.filter((prop)=> {
-                return prop[1].id > 5
-            })
-        )
+    // async function filter(){
+    //     setFilteredProp(
+    //         properties.filter((prop)=> {
+    //             return prop[1].id > 5
+    //         })
+    //     )
         
-    }
+    // }
 
     // function lol () {
     //     console.log('lol')
@@ -89,22 +89,22 @@ function SearchPage() {
 
         return (
             // Important! Always set the container height explicitly
-            <div style={{ height: '100%', width: '100%' }}>
-                <LoadScript
-                    googleMapsApiKey={key}>
-                    <GoogleMap
-                        mapContainerStyle={mapStyles}
-                        zoom={13}
-                        center={defaultCenter}
-                    >
-                        {filteredProp.map((p)=> {
-                            return (
-                                <Marker key={p[1].name} position={p[1].coordinates} url={`/propertyies/${p[1].id}`} clickable={true} onClick={()=> history.push(`/properties/${p[1].id}`)}/>
-                            )
-                        })}
-                    </GoogleMap>
-                </LoadScript>
-            </div>
+                <div style={{ height: '100%', width: '100%' }}>
+                    <LoadScript
+                        googleMapsApiKey={key}>
+                        <GoogleMap
+                            mapContainerStyle={mapStyles}
+                            zoom={13}
+                            center={defaultCenter}
+                        >
+                            {Object.entries(properties).map((p)=> {
+                                return (
+                                    <Marker key={p[1].name} position={p[1].coordinates} url={`/propertyies/${p[1].id}`} clickable={true} onClick={()=> history.push(`/properties/${p[1].id}`)}/>
+                                )
+                            })}
+                        </GoogleMap>
+                    </LoadScript>
+                </div>
         );
     }
 
@@ -119,14 +119,14 @@ function SearchPage() {
                     <form>
                         <input type='date'></input>
                         <input type='date'></input>
-                        <button onClick={filter}>click</button>
+                        {/* <button onClick={filter}>click</button> */}
                     </form>
                 </div>
 
                 <div className='resultHolder'>
 
                     <div className='rCardHold'>
-                        {filteredProp.map((property)=> {
+                        {Object.entries(properties).map((property)=> {
                             const image = property[1].Images[1].link ? property[1].Images[1].link : property[1].Images[0].link
                             return (
                                 <NavLink to={`/properties/${property[1].id}`} key={property[0]}>

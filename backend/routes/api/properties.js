@@ -57,12 +57,14 @@ router.delete(
     `/:id(\\d+)`,
     asyncHandler(async (req, res) => {
         const id = req.params.id;
-        const property = await Property.findOne({
-            where: { id: id },
-            include: [{ model: Image }, { model: Reservation }],
-        });
+        // const property = await Property.findOne({
+        //     where: { id: id },
+        // });
+        const property = await Property.findByPk(id)
+        console.log('**********HI')
         if (property) {
-            await property.destroy();
+            property.destroy();
+            res.send('success')
         } else {
             res.json('could not find property')
         }
