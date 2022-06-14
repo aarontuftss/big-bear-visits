@@ -23,7 +23,7 @@ function App() {
   const sessionUser = useSelector((state) => state.session.user);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const { params } = useParams()
+  // const { params } = useParams()
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser())
@@ -66,7 +66,7 @@ function App() {
             <h1>New Reservation Form</h1>
             <NewReservation />
           </Route>
-          <Route path="/reservations/:reservationId" exact={true}>
+          <Route path="/reservations/:reservationId/:propId" exact={true}>
             <h1>Personal Reservation Info & Support Submit Form</h1>
             <EditReservation />
           </Route>

@@ -39,15 +39,6 @@ function PropertyPage(props) {
         console.log(arr)
         return arr
     }
-
-    useEffect(()=> {
-        // if (property) {
-        //     setDisabled(property.Reservations.map((r) => {
-        //         return inbetweens(r.startDate, r.endDate)
-        //     }))
-        // }
-        
-    }, [])
     
 
     const [state, setState] = useState([
@@ -63,9 +54,9 @@ function PropertyPage(props) {
             .then(()=> dispatch(propertyActions.getOneProperty(id)))
             .then(()=> dispatch(reservationActions.getAllReservations()))
             .then(()=> {
-                property.Reservations.map((r) => {
-                    return inbetweens(r.startDate, r.endDate)
-                })
+                // property.Reservations.map((r) => {
+                //     return inbetweens(r.startDate, r.endDate)
+                // })
             })
             .then(() => setIsLoaded(true));
     }, [dispatch]);
@@ -74,8 +65,6 @@ function PropertyPage(props) {
     useEffect(()=> {
     }, [state])
 
-
-    console.log(disabled)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -119,6 +108,10 @@ function PropertyPage(props) {
     const images = property.Images.map((image) => {
             return image.link
         })
+
+    const oof = property.Reservations.map((r) => {
+        return inbetweens(r.startDate, r.endDate)
+    })
     
     return (
         <>

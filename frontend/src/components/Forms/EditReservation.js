@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect, useHistory, useParams } from "react-router-dom";
 import * as reservationActions from "../../store/reservation"
+import * as propertyActions from '../../store/property';
+
+import { DateRange } from 'react-date-range';
+
 import './Forms.css';
 
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
 
 function EditReservation() {
     const dispatch = useDispatch();
@@ -11,18 +17,42 @@ function EditReservation() {
     const sessionUser = useSelector((state) => state.session.user);
     const currentRes = useSelector((state) => state.reservations.singleReservation.reservation);
 
+    const property = useSelector(state => state.properties.singleProperty.property);
+
     const location = window.location.href.split('/')
-    const id = location[location.length - 1]
+    const id = location[location.length - 2]
+
+    const { propId } = useParams()
+    console.log(propId)
+
+    // const propId = useSelector(state => state.reservations.singleReservation.reservation.propertyId);
     
 
-    const [startDate, setStartDate] = useState("");
-    const [endDate, setEndDate] = useState("");
+    // const [startDate, setStartDate] = useState("");
+    // const [endDate, setEndDate] = useState("");
 
     const [errors, setErrors] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
 
+    const [disabled, setDisabled] = useState([])
+
+    const [state, setState] = useState([
+        {
+            startDate: new Date(),
+            endDate: new Date(),
+            key: 'selection'
+        }
+    ]);
+
+
     useEffect(() => {
         dispatch(reservationActions.getOneReservation(id))
+        .then(() => dispatch(propertyActions.getOneProperty(propId)))
+        .then(()=> {
+            // property.Reservations.map((r) => {
+            //     return inbetweens(r.startDate, r.endDate)
+            // })
+        })
         .then(()=> setIsLoaded(true))
     }, [dispatch]);
 
@@ -30,6 +60,22 @@ function EditReservation() {
         console.log(currentRes)
 
     }, [isLoaded]);
+
+    useEffect(() => {
+    }, [state])
+
+    function inbetweens(start, end) {
+        for (var arr = [], dt = new Date(start); dt <= new Date(end); dt.setDate(dt.getDate() + 1)) {
+            disabled.push(new Date(dt))
+            arr.push(new Date(dt));
+        }
+        console.log(arr)
+        return arr
+    }
+
+    const oof = property.Reservations.map((r) => {
+        return inbetweens(r.startDate, r.endDate)
+    })
 
     
     if (!sessionUser) return <Redirect to="/login" />;
@@ -40,42 +86,51 @@ function EditReservation() {
         const data = {
             propertyId: currentRes.propertyId,
             renterId: currentRes.renterId,
-            startDate: startDate,
-            endDate: endDate,
-            id: currentRes.id
+            startDate: state[0].startDate,
+            endDate: state[0].endDate,
+            id: id
         }
         await dispatch(reservationActions.editReservation(data))
             .then(() => history.push(`/users/${sessionUser.id}`))
 
     };
 
+    const handleDelete = async () => {
+
+        await dispatch(reservationActions.deleteReservation(id))
+        history.push(`/users/${sessionUser.id}`)
+        
+    }
+    
+    
+
 
     return (
-        <form onSubmit={handleSubmit}>
-            <ul>
-                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-            </ul>
-            <label>
-                Start
-                <input
-                    type="date"
-                    // value={}
-                    onChange={(e) => setStartDate(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                End
-                <input
-                    type="date"
-                    // value={}
-                    onChange={(e) => setEndDate(e.target.value)}
-                    required
-                />
-            </label>
-            <button type="submit">Change Reservation</button>
-        </form>
-    );
-}
-
-export default EditReservation;
+            <>
+            <div>
+                {isLoaded && (
+                    <>
+                    <form onSubmit={handleSubmit}>
+                        <ul>
+                        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                        </ul>
+                        <h1>{property.name} - {sessionUser.username} - {currentRes.id}</h1>
+                        <DateRange
+                        editableDateInputs={true}
+                        minDate={new Date()}
+                        onChange={item => { setState([item.selection]); }}
+                        moveRangeOnFirstSelection={false}
+                        ranges={state}
+                        disabledDates={[...disabled]}
+                        />
+                        <button type="submit">Change Reservation</button>
+                        </form>
+                        <button onClick={handleDelete}>Cancel Reservation</button>
+                    </>
+                )}
+                </div>
+                </>
+                );
+            }
+            
+            export default EditReservation;

@@ -88,19 +88,21 @@ function UserPage() {
                             <div className="profileScroll">
                                     {userReservations.map((r) => {
                                         const prop = visitedProps.filter((p)=> {return p.id === r.propertyId})
-                                        console.log(prop)
+                                        console.log(prop[0])
                                         return (
                                             <>
-                                                <div className="profileCard" onClick={() => history.push(`/reservations/${r.id}`)}>
+                                                <div className="profileCard" onClick={() => history.push(`/reservations/${r.id}/${r.propertyId}`)}>
                                                     {/* {/* <img src={p.Images[1].link} alt=""></img> */}
                                                     <div>
-                                                        <h2>{prop.name}</h2>
+                                                        <h1>{r.id}</h1>
+                                                        {/* <h2>{prop[0].name? prop[0].name : 'error'}</h2> */}
+                                                        {/* <h2>{prop[0].name}</h2> */}
                                                         {/* <div>
                                                             <p>{p.bedrooms} <img src={bedd} alt=""></img></p>
                                                             <p> {p.bathrooms} <img src={bathh} alt=""></img></p>
                                                             <p> {p.maxGuests} <img src={maxx} alt=""></img></p>
                                                         </div> */}
-                                                        ${prop.price} / night
+                                                        {/* ${prop[0].price} / night */}
                                                     </div>
                                                 </div>
                                             </>
