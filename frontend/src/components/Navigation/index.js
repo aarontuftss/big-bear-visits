@@ -18,8 +18,8 @@ function Navigation({ isLoaded }) {
     } else {
         sessionLinks = (
             <>
-                <NavLink to="/login" className='authB'>Log In</NavLink>
-                <NavLink to="/signup" className='authB'>Sign Up</NavLink>
+                <NavLink to="/login" className='searchB'><h4>Log In</h4></NavLink>
+                <NavLink to="/signup" className='searchB1'><h4 className='signUp'>Sign Up</h4></NavLink>
             </>
         );
     }
@@ -39,7 +39,7 @@ function Navigation({ isLoaded }) {
             </div>
 
             <div className='navS'>
-                <NavLink to={`/search`}> Search </NavLink>
+                <NavLink to={`/search`} className='searchB'><h4>Search</h4></NavLink>
                 {isLoaded && sessionLinks}
             </div>
         

@@ -17,9 +17,9 @@ function ProfileButton({ user }) {
     return (
         <>
             <div className="userBHold">
-                <NavLink to={`/properties/new`} className='uploadB'>Upload Home</NavLink>
-                <NavLink to={`/users/${user.id}`} className='profileB'>Profile</NavLink>
-                <button onClick={logout} className='logoutB'>Log Out</button>
+                <NavLink to={`/properties/new`} className='searchB'><h4>Upload Home</h4></NavLink>
+                <NavLink to={`/users/${user.id}`} className='searchB1'><h4 className="signUp">Profile</h4></NavLink>
+                {/* <button onClick={logout} className='logoutB'>Log Out</button> */}
             </div>
         </>
     );
