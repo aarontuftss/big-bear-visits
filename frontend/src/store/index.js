@@ -6,6 +6,7 @@ import propertyReducer from './property'
 import reservationReducer from './reservation'
 import supportReducer from './support'
 import keyReducer from "./key";
+import weatherReducer from "./weather";
 
 const rootReducer = combineReducers({
   // add reducer functions here
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   properties: propertyReducer,
   reservations: reservationReducer,
   supports: supportReducer,
-  key: keyReducer
+  key: keyReducer,
+  weather: weatherReducer
 });
 
 let enhancer;

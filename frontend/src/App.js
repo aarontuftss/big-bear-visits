@@ -6,6 +6,7 @@ import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 
+import * as weatherActions from "./store/weather"
 import * as propertyActions from "./store/property"
 import * as keyActions from './store/key'
 import * as reservationActions from "./store/reservation"
@@ -30,6 +31,7 @@ function App() {
     .then(()=> dispatch(propertyActions.getAllProperties()))
     .then(()=> dispatch(keyActions.getKey()))
     .then(() => dispatch(reservationActions.getAllReservations()))
+    .then(() => dispatch(weatherActions.getWeather()))
     .then(() => setIsLoaded(true));
   }, [dispatch]);
 

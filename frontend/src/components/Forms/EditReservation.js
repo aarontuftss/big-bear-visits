@@ -49,9 +49,9 @@ function EditReservation() {
         dispatch(reservationActions.getOneReservation(id))
         .then(() => dispatch(propertyActions.getOneProperty(propId)))
         .then(()=> {
-            // property.Reservations.map((r) => {
-            //     return inbetweens(r.startDate, r.endDate)
-            // })
+            property.Reservations.map((r) => {
+                return inbetweens(r.startDate, r.endDate)
+            })
         })
         .then(()=> setIsLoaded(true))
     }, [dispatch]);
