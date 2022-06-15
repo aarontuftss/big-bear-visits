@@ -20,6 +20,7 @@ function HomePage() {
         <>
         <div className='homePage-main'>
             <video src={bgVid} autoPlay loop muted className='bgVidd'/>
+            <div className='overlayy'></div>
             <div className='mainBG'>
                 <div className='mid'>
                     <NavLink to={`/search`}>

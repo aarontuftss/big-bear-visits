@@ -22,7 +22,14 @@ function SearchPage() {
 
     const [isLoaded, setIsLoaded] = useState(false);
 
-    // const Marker = ({ text }) => <div>{text}</div>;
+
+    const [checkIn, setCheckin] = useState('')
+    const [checkOut, setCheckOut] = useState('')
+    const [bedrooms, setBedrooms] = useState(0)
+    const [bathrooms, setBathrooms] = useState(0)
+    const [guests, setGuests] = useState(0)
+
+
 
     useEffect(() => {
         dispatch(sessionActions.restoreUser())
@@ -117,9 +124,13 @@ function SearchPage() {
                 <div className='filterHoler'>
                     <p>Find Exactly What You Need</p>
                     <form>
-                        <input type='date'></input>
-                        <input type='date'></input>
-                        {/* <button onClick={filter}>click</button> */}
+                        <label> Check In <input type='date' onChange={(e) => setCheckin(e.target.value)}></input></label>
+                            <label>Check Out<input type='date' onChange={(e) => setCheckOut(e.target.value)}></input></label>
+                            <label>Bedrooms<input type='number' placeholder='Bedrooms' onChange={(e) => setBedrooms(e.target.value)}></input></label>
+                            <label>Bathrooms<input type='number' placeholder='Bathrooms' onChange={(e) => setBathrooms(e.target.value)}></input></label>
+                            <label>Guests<input type='number' placeholder='Guests' onChange={(e) => setGuests(e.target.value)}></input></label>
+                        
+                        <button onClick={((e)=> {e.preventDefault(); console.log(checkIn, checkOut, bedrooms,bathrooms,guests)})}>Filter Properties</button>
                     </form>
                 </div>
 

@@ -109,3 +109,8 @@
 *{
     text-decoration: none;
 }
+
+.filterHoler > form {
+    display: flex;
+    flex-direction: row;
+}

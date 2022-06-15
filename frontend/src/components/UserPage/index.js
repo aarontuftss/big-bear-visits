@@ -8,6 +8,7 @@ import * as sessionActions from '../../store/session';
 import bedd from '../PropertyPage/bedIcon.png'
 import bathh from '../PropertyPage/bathIcon.png'
 import maxx from '../PropertyPage/maxPpl.png'
+import Chart from "./chart";
 
 
 function UserPage() {
@@ -105,7 +106,7 @@ function UserPage() {
                             </div>
                         </div>
                         <div className="bottomm">
-                                hello
+                            hello
 
                         </div>
                     </div>
