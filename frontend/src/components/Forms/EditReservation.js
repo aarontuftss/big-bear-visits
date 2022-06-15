@@ -25,12 +25,6 @@ function EditReservation() {
     const { propId } = useParams()
     console.log(propId)
 
-    // const propId = useSelector(state => state.reservations.singleReservation.reservation.propertyId);
-    
-
-    // const [startDate, setStartDate] = useState("");
-    // const [endDate, setEndDate] = useState("");
-
     const [errors, setErrors] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -43,7 +37,6 @@ function EditReservation() {
             key: 'selection'
         }
     ]);
-
 
     useEffect(() => {
         dispatch(reservationActions.getOneReservation(id))
