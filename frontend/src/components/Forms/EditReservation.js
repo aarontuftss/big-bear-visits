@@ -103,22 +103,30 @@ function EditReservation() {
             <div>
                 {isLoaded && (
                     <>
-                    <form onSubmit={handleSubmit}>
-                        <ul>
-                        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                        </ul>
-                        <h1>{property.name} - {sessionUser.username} - {currentRes.id}</h1>
-                        <DateRange
-                        editableDateInputs={true}
-                        minDate={new Date()}
-                        onChange={item => { setState([item.selection]); }}
-                        moveRangeOnFirstSelection={false}
-                        ranges={state}
-                        disabledDates={[...disabled]}
-                        />
-                        <button type="submit">Change Reservation</button>
+                    <div className="support-area">
+
+                    </div>
+                    <div className="updateRes-hero">
+                        <h1>Your Reservation at {property.name}</h1>
+                        <h2>{currentRes.startDate.split('T')[0]} - {currentRes.endDate.split('T')[0]}</h2>
+                        <form onSubmit={handleSubmit}>
+                            <ul>
+                            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                            </ul>
+                            <DateRange
+                            editableDateInputs={true}
+                            minDate={new Date()}
+                            onChange={item => { setState([item.selection]); }}
+                            moveRangeOnFirstSelection={false}
+                            ranges={state}
+                            disabledDates={[...disabled]}
+                            />
                         </form>
-                        <button onClick={handleDelete}>Cancel Reservation</button>
+                        <div className="fBHold">
+                            <button onClick={handleSubmit}>Change Dates</button>
+                            <button onClick={handleDelete}>Delete Reservation</button>
+                        </div>
+                    </div>
                     </>
                 )}
                 </div>

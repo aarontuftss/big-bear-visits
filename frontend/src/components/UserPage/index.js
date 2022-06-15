@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Redirect, useHistory, useParams } from "react-router-dom";
 import './UserPage.css';
 import userIcon from './userIcon.png'
+import * as sessionActions from '../../store/session';
 
 import bedd from '../PropertyPage/bedIcon.png'
 import bathh from '../PropertyPage/bathIcon.png'
@@ -40,6 +41,12 @@ function UserPage() {
         e.preventDefault();
     };
 
+    const logout = (e) => {
+        e.preventDefault();
+        dispatch(sessionActions.logout());
+        history.push('/')
+    };
+
 
     if(sessionUser && sessionUser.id === parseInt(userId)){
         return (
@@ -47,6 +54,7 @@ function UserPage() {
             <div className="welcomeBanner">
                 <h1>Welcome Back, {sessionUser.username}</h1>
                 <img src={userIcon} alt=""></img>
+                <button onClick={logout} className='logoutB'>Log Out</button>
             </div>
 
             <div className="profileWrap">
@@ -77,7 +85,7 @@ function UserPage() {
                             </div>
                         </div>
                         <div className="bottomm">
-                
+                                hello
 
                         </div>
                     </div>
@@ -113,7 +121,7 @@ function UserPage() {
 
                         </div>
                         <div className="bottomm">
-
+                                hello
                         </div>
                     </div>
                 </div>

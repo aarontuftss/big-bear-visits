@@ -1,0 +1,42 @@
+.login-hero{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: solid black 1px;
+    background-color: whitesmoke;
+    height: 400px;
+    padding: 25px;
+    border-radius: 15px;
+    
+}
+
+.fBG{
+    height: 92.5vh;
+    background-color: maroon;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.logB{
+    margin: 5px;
+    margin-top: 15px;
+    background-color: maroon;
+    color: white;
+    border: solid transparent 1px;
+    padding: 5px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.logB:hover{
+    transform: translateY(-2px);
+}
+
+li{
+    list-style: none;
+    text-align: center;
+}
+

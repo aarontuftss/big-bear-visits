@@ -1,5 +1,5 @@
 .profileWrap{
-    min-height: calc(90vh - 70px);
+    max-height: calc(92.5vh - 70px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -32,14 +32,14 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    min-height: 800px;
+    min-height: 400px;
     height: 80vh;
 }
 
 .top2 > div{
     width: 40vw;
     min-width: 300px;
-    background-color: maroon;
+    /* background-color: maroon; */
     border-radius: 7px;
     display: flex;
     flex-direction: column;
@@ -147,4 +147,20 @@
 }
 .profileCard>div>div>p>img {
     width: 20px;
+}
+
+.logoutB{
+    margin-left: 15px;
+    background-color: whitesmoke;
+    border: solid transparent 1px;
+    padding: 5px;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.logoutB:hover{
+    background-color: transparent;
+    border: solid white 1px;
+    color: white;
 }

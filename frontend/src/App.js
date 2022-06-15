@@ -69,7 +69,6 @@ function App() {
             <NewReservation />
           </Route>
           <Route path="/reservations/:reservationId/:propId" exact={true}>
-            <h1>Personal Reservation Info & Support Submit Form</h1>
             <EditReservation />
           </Route>
           <Route path="/about" exact={true}>

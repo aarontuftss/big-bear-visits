@@ -38,3 +38,35 @@ label > input, textarea{
     width: 300px;
 }
 
+
+/* Update res form */
+
+.updateRes-hero{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 92.5vh;
+}
+
+.fBHold{
+    display: flex;
+}
+
+.fBHold > button {
+    padding: 10px;
+    background-color: maroon;
+    color: white;
+    border: solid transparent 1px;
+    margin: 15px;
+    font-size: 12pt;
+    transition: all 0.2s;
+}
+
+.fBHold>button:hover {
+    background-color: whitesmoke;
+    color: black;
+    border: solid black 1px;
+    cursor: pointer;
+
+}
