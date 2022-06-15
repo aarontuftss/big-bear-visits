@@ -23,7 +23,6 @@ function EditReservation() {
     const id = location[location.length - 2]
 
     const { propId } = useParams()
-    console.log(propId)
 
     const [errors, setErrors] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -50,7 +49,6 @@ function EditReservation() {
     }, [dispatch]);
 
     useEffect(() => {
-        console.log(currentRes)
 
     }, [isLoaded]);
 
@@ -62,7 +60,6 @@ function EditReservation() {
             disabled.push(new Date(dt))
             arr.push(new Date(dt));
         }
-        console.log(arr)
         return arr
     }
 

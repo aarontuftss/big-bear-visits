@@ -39,7 +39,6 @@ function SearchPage() {
         .then(()=> setIsLoaded(true))
     }, [dispatch]);
 
-    console.log(properties)
     async function gg(){
         for(let i = 0; i < Object.entries(properties).length; i++){
             let index = Object.entries(properties)
@@ -78,10 +77,6 @@ function SearchPage() {
         
     // }
 
-    // function lol () {
-    //     console.log('lol')
-    //     history.push
-    // }
 
     function SimpleMap() {
 

@@ -22,6 +22,7 @@ function HomePage() {
             <video src={bgVid} autoPlay loop muted className='bgVidd'/>
             <div className='overlayy'></div>
             <div className='mainBG'>
+                <h1>Plan your next trip to beautiful Big Bear Lake, California</h1>
                 <div className='mid'>
                     <NavLink to={`/search`}>
                         <div className='centerBook'>
@@ -30,7 +31,6 @@ function HomePage() {
                         </div>
                     </NavLink>
                 </div>
-                <h1>Plan your next trip to beautiful Big Bear Lake, California</h1>
 
             </div>
             <div className='homeCardContainer'>

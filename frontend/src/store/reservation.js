@@ -66,7 +66,6 @@ const newReservationAction = (reservation) => ({
 
 // EDIT A RESERVATION
 export const editReservation = (reservation) => async (dispatch) => {
-    console.log(reservation)
     const response = await csrfFetch(`/api/reservations/${reservation.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" }, // ****** MIGHT NEED TO COME BACK TO THIS

@@ -46,8 +46,8 @@ module.exports = (sequelize, DataTypes) => {
   Property.associate = function(models) {
     // associations can be defined here
     Property.belongsTo(models.User, {foreignKey: 'ownerId'});
-    Property.hasMany(models.Image, {foreignKey: 'propertyId'});
-    Property.hasMany(models.Reservation, {foreignKey: 'propertyId'});
+    Property.hasMany(models.Image, { foreignKey: 'propertyId', onDelete: 'cascade'});
+    Property.hasMany(models.Reservation, { foreignKey: 'propertyId', onDelete: 'cascade'});
   };
   return Property;
 };

@@ -188,3 +188,22 @@
 .resCard:hover{
     border: solid black 1px
 }
+
+.statHoldd{
+    border: solid black 1px;
+    width: 80%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.statHoldd > * {
+    padding: 5px;
+    margin: 20px;
+    background-color: maroon;
+    color: white;
+    border-radius: 7px;
+}

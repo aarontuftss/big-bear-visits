@@ -40,7 +40,6 @@ router.put(
     `/:id(\\d+)`,
     asyncHandler(async (req, res) => {
         const id = req.params.id;
-        console.log(id)
         const reservation = await Reservation.findOne({
             where: { id: id },
             include: [{ model: Support }],

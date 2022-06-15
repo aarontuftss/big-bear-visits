@@ -42,7 +42,6 @@ function EditProp() {
 
         let addresRegex = /^[0-9]* .*/g
 
-        console.log(city)
 
 
         if (name.length > 100) errors.push('Name must be less than 100 characters')
@@ -61,7 +60,6 @@ function EditProp() {
     }
 
     function pageSetup() {
-        console.log(propertyInfo[0][1])
         if (sessionUser.id !== propertyInfo[0][1].ownerId) {
             history.push('/search')
         }

@@ -36,7 +36,6 @@ function PropertyPage(props) {
             disabled.push(new Date(dt))
             arr.push(new Date(dt));
         }
-        console.log(arr)
         return arr
     }
     
@@ -87,9 +86,9 @@ function PropertyPage(props) {
 
     async function handleDelete(e){
         e.preventDefault();
-        console.log(property.id)
         await dispatch(propertyActions.deleteProperty(property.id))
         .then(() => dispatch(propertyActions.getAllProperties()))
+        .then(()=> dispatch(reservationActions.getAllReservations()))
         history.push(`/users/${sessionUser.id}`)
     }
 

@@ -64,7 +64,6 @@ function NewProp() {
 
         let addresRegex = /^[0-9]* .*/g
 
-        console.log(city)
 
 
         if (name.length > 100 ) errors.push('Name must be less than 100 characters')

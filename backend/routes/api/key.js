@@ -10,7 +10,6 @@ const { check } = require('express-validator');
 router.get(
     '/',
     asyncHandler(async (req, res) => {
-        console.log('******************', process.env.GOOGLE_API)
 
         return res.json(process.env.GOOGLE_API)
     }),

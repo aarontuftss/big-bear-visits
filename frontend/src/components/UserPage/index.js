@@ -4,11 +4,17 @@ import { NavLink, Redirect, useHistory, useParams } from "react-router-dom";
 import './UserPage.css';
 import userIcon from './userIcon.png'
 import * as sessionActions from '../../store/session';
+import * as reservationActions from '../../store/reservation';
+import * as propertyActions from '../../store/property';
+
+
 
 import bedd from '../PropertyPage/bedIcon.png'
 import bathh from '../PropertyPage/bathIcon.png'
 import maxx from '../PropertyPage/maxPpl.png'
 import Chart from "./chart";
+
+import loadGif from '../SearchPage/mapLoader.gif'
 
 
 function UserPage() {
@@ -18,6 +24,14 @@ function UserPage() {
     const properties = useSelector((state) => state.properties.allProperties);
     const reservations = useSelector((state) => state.reservations.allReservations)
 
+    const [isLoaded, setIsLoaded] = useState(false)
+
+    function inbetweens(start, end) {
+        for (var arr = [], dt = new Date(start); dt <= new Date(end); dt.setDate(dt.getDate() + 1)) {
+            arr.push(new Date(dt));
+        }
+        return arr
+    }
 
     const userProperties = Object.values(properties).filter((p)=> {
         p['profit'] = 0
@@ -41,9 +55,36 @@ function UserPage() {
         }
     })
 
+    const totalProfit = () => {
+        let total = 0
+        for(let i = 0 ; i < userProperties.length ; i++){
+            total += userProperties[i].profit
+        }
+        return total
+
+    }
+
+    const averageProp = () => {
+        let total = 0
+        for (let i = 0; i < userProperties.length; i++) {
+            total += userProperties[i].profit
+        }
+        return Math.floor(total / userProperties.length)
+    }
+
+    const averageRes = () => {
+        let total = totalProfit()
+
+        return Math.floor(total/profitReservations.length)
+    }
+
+    console.log(totalProfit())
+
     useEffect(()=> {
-        console.log( userProperties )
-    }, [])
+        dispatch(propertyActions.getAllProperties())
+        .then(()=> dispatch(reservationActions.getAllReservations()))
+        .then(()=> setIsLoaded(true))
+    }, [dispatch])
 
 
     const visitedProps = Object.values(properties).filter((p)=> {
@@ -68,8 +109,16 @@ function UserPage() {
         history.push('/')
     };
 
+    if(!isLoaded){
+        return (
+            <div className="loaderr">
+                <img src={loadGif} alt="loader"></img>
+            </div>
+        )
+    }
 
-    if(sessionUser && sessionUser.id === parseInt(userId)){
+
+    if(isLoaded && sessionUser && sessionUser.id === parseInt(userId)){
         return (
             <>
             <div className="welcomeBanner">
@@ -86,27 +135,26 @@ function UserPage() {
                             <div className="profileScroll">
                                 {userProperties.map((p)=> {
                                     return (
-                                        <>
-                                            <div className="profileCard" onClick={()=> history.push(`/properties/${p.id}`)}>
-                                                <img src={p.Images[1].link} alt=""></img>
+                                        <div className="profileCard" onClick={()=> history.push(`/properties/${p.id}`)} key={p?.id}>
+                                            <img src={p.Images[1]?.link} alt=""></img>
+                                            <div>
+                                                <h2>{p.name}</h2>
                                                 <div>
-                                                    <h2>{p.name}</h2>
-                                                    <div>
-                                                        <p>{p.bedrooms} <img src={bedd} alt=""></img></p>
-                                                        <p> {p.bathrooms} <img src={bathh} alt=""></img></p>
-                                                        <p> {p.maxGuests} <img src={maxx} alt=""></img></p>
-                                                    </div>
-                                                        ${p.price} / night
+                                                    <p>{p.bedrooms} <img src={bedd} alt=""></img></p>
+                                                    <p> {p.bathrooms} <img src={bathh} alt=""></img></p>
+                                                    <p> {p.maxGuests} <img src={maxx} alt=""></img></p>
                                                 </div>
+                                                    ${p.price} / night
                                             </div>
-                                        </>
+                                        </div>
                                     )
                                 })}
 
                             </div>
                         </div>
                         <div className="bottomm">
-                            hello
+                            {/* <h2>Income</h2> */}
+                            <Chart properties={userProperties} />
 
                         </div>
                     </div>
@@ -117,16 +165,14 @@ function UserPage() {
                             <div className="profileScroll">
                                     {userReservations.map((r) => {
                                         const prop = visitedProps.filter((p)=> {return p.id === r.propertyId})
-                                        console.log(prop[0])
+                                        
                                         return (
-                                            <>
-                                                <div className="resCard" onClick={() => history.push(`/reservations/${r.id}/${r.propertyId}`)}>
-                                                    <img src={prop[0]?.Images[1]?.link} alt="" className="resImg"></img> 
-                                                    <div>
-                                                        <h1>{prop[0].name} - {r.startDate.split('T')[0]}</h1>
-                                                    </div>
+                                            <div className="resCard" onClick={() => history.push(`/reservations/${r.id}/${r.propertyId}`)} key={r?.id}>
+                                                <img src={prop[0]?.Images[1]?.link} alt="" className="resImg"></img> 
+                                                <div>
+                                                    <h1>{prop[0]?.name} - {r.startDate.split('T')[0]}</h1>
                                                 </div>
-                                            </>
+                                            </div>
                                         )
                                     }).reverse()}
 
@@ -134,7 +180,16 @@ function UserPage() {
 
                         </div>
                         <div className="bottomm">
-                                hello
+                                <h2>Basic Information</h2>
+                                <div className="statHoldd">
+                                    <p>Total Properties: {userProperties.length}</p>
+                                    <p>Booked Reservations: {userReservations.length}</p>
+                                    <p>Sold Reservations: {profitReservations.length}</p>
+                                    <p>Total Income: ${totalProfit()}</p>
+                                    <p>Average Property Income: ${averageProp()}</p>
+                                    <p>Average Reservation Income ${averageRes()}</p>
+
+                                </div>
                         </div>
                     </div>
                 </div>

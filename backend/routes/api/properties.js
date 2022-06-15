@@ -61,7 +61,6 @@ router.delete(
         //     where: { id: id },
         // });
         const property = await Property.findByPk(id)
-        console.log('**********HI')
         if (property) {
             property.destroy();
             res.send('success')
