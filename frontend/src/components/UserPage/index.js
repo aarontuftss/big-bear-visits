@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Redirect, useHistory, useParams } from "react-router-dom";
 import './UserPage.css';
@@ -17,13 +17,33 @@ function UserPage() {
     const properties = useSelector((state) => state.properties.allProperties);
     const reservations = useSelector((state) => state.reservations.allReservations)
 
+
     const userProperties = Object.values(properties).filter((p)=> {
+        p['profit'] = 0
         return p.ownerId === sessionUser.id
     })
 
     const userReservations = Object.values(reservations).filter((r)=> {
         return r.renterId === sessionUser.id
     })
+
+    const profitReservations = Object.values(reservations).map((r)=> {
+        for(let i = 0 ; i < userProperties.length ; i++){
+            if(r.propertyId === userProperties[i].id){
+                let dif_time = new Date(r.endDate).getTime() - new Date(r.startDate).getTime()
+                dif_time = dif_time / (1000 * 3600 * 24)
+                let profit = dif_time * userProperties[i].price
+                if (userProperties[i].profit) userProperties[i].profit = userProperties[i].profit + profit
+                else userProperties[i]['profit'] = profit
+                return r
+            }
+        }
+    })
+
+    useEffect(()=> {
+        console.log( userProperties )
+    }, [])
+
 
     const visitedProps = Object.values(properties).filter((p)=> {
         let test = false
@@ -99,23 +119,15 @@ function UserPage() {
                                         console.log(prop[0])
                                         return (
                                             <>
-                                                <div className="profileCard" onClick={() => history.push(`/reservations/${r.id}/${r.propertyId}`)}>
-                                                    {/* {/* <img src={p.Images[1].link} alt=""></img> */}
+                                                <div className="resCard" onClick={() => history.push(`/reservations/${r.id}/${r.propertyId}`)}>
+                                                    <img src={prop[0]?.Images[1]?.link} alt="" className="resImg"></img> 
                                                     <div>
-                                                        <h1>{r.id}</h1>
-                                                        {/* <h2>{prop[0].name? prop[0].name : 'error'}</h2> */}
-                                                        {/* <h2>{prop[0].name}</h2> */}
-                                                        {/* <div>
-                                                            <p>{p.bedrooms} <img src={bedd} alt=""></img></p>
-                                                            <p> {p.bathrooms} <img src={bathh} alt=""></img></p>
-                                                            <p> {p.maxGuests} <img src={maxx} alt=""></img></p>
-                                                        </div> */}
-                                                        {/* ${prop[0].price} / night */}
+                                                        <h1>{prop[0].name} - {r.startDate.split('T')[0]}</h1>
                                                     </div>
                                                 </div>
                                             </>
                                         )
-                                    })}
+                                    }).reverse()}
 
                             </div>
 

@@ -34,6 +34,11 @@ function SignupFormPage() {
         return setErrors(['Confirm Password field must be the same as the Password field']);
     };
 
+    const handleDemo = (e) => {
+        e.preventDefault();
+        return dispatch(sessionActions.login({credential:'demo@user.io', password:'password'}))
+    }
+
     return (
         <>
         <div className='fBG'>
@@ -85,7 +90,8 @@ function SignupFormPage() {
                     </label>
                 </form>
                 <button onClick={handleSubmit} className='logB'>Sign Up</button>
-                <NavLink to={'/signup'}>Already a member?</NavLink>
+                <button onClick={handleDemo} className='logB'>Demo User</button>
+                <NavLink to={'/login'}>Already a member?</NavLink>
             </div>
         </div>
         </>

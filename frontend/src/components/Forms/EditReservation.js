@@ -107,7 +107,7 @@ function EditReservation() {
 
                     </div>
                     <div className="updateRes-hero">
-                        <h1>Your Reservation at {property.name}</h1>
+                        <h1>Your Reservation at {property?.name}</h1>
                         <h2>{currentRes.startDate.split('T')[0]} - {currentRes.endDate.split('T')[0]}</h2>
                         <form onSubmit={handleSubmit}>
                             <ul>
