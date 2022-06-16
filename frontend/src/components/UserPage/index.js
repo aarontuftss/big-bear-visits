@@ -78,8 +78,6 @@ function UserPage() {
         return Math.floor(total/profitReservations.length)
     }
 
-    console.log(totalProfit())
-
     useEffect(()=> {
         dispatch(propertyActions.getAllProperties())
         .then(()=> dispatch(reservationActions.getAllReservations()))
@@ -136,7 +134,7 @@ function UserPage() {
                                 {userProperties.map((p)=> {
                                     return (
                                         <div className="profileCard" onClick={()=> history.push(`/properties/${p.id}`)} key={p?.id}>
-                                            <img src={p.Images[1]?.link} alt=""></img>
+                                            <img src={p.Images[0]?.link} alt=""></img>
                                             <div>
                                                 <h2>{p.name}</h2>
                                                 <div>

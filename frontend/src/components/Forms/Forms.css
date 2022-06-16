@@ -70,3 +70,7 @@ label > input, textarea{
     cursor: pointer;
 
 }
+
+ul {
+    padding-left: 0px;
+}
