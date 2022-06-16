@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory, useParams } from "react-router-dom";
+import { Redirect, useHistory, useParams, NavLink } from "react-router-dom";
 import * as propertyActions from "../../store/property";
 import './Forms.css';
+
 
 
 function EditProp() {
@@ -19,13 +20,13 @@ function EditProp() {
     const [price, setPrice] = useState('');
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
-    const [city, setCity] = useState('');
-    const [state, setState] = useState('');
+    const [city, setCity] = useState('Big Bear Lake');
+    const [state, setState] = useState('California');
     const [bedrooms, setBedrooms] = useState('');
     const [bathrooms, setBathrooms] = useState('');
     const [maxGuests, setMaxGuests] = useState('');
     const [description, setDescription] = useState('');
-    const [imageUrl, setImageUrl] = useState("");
+    const [imageUrl, setImageUrl] = useState("https://www.destinationbigbear.com/media/images/HiddenWolfRetreat/2000/00100.jpg");
     const [images, setImages] = useState([]);
     const [errors, setErrors] = useState([]);
 
@@ -46,13 +47,24 @@ function EditProp() {
 
         if (name.length > 100) errors.push('Name must be less than 100 characters')
         if (!name.length || name === '') errors.push('Please provide a name')
+
         if (!address.match(addresRegex)) errors.push('Please provide a valid address')
+
         if (city.toLowerCase() !== 'big bear lake' && city.toLowerCase() !== 'big bear city') errors.push('Property must be in Big Bear Lake or Big Bear City')
         if (state.toLowerCase() !== 'california') errors.push('Property must be in California')
+        
         if (bathrooms === '' || bedrooms === '' || maxGuests === '') errors.push('Please provide valid number of bedrooms, bathrooms, & guests')
-        if (description.length < 5) errors.push('Please provide a brief description')
+        
+        if (bathrooms === 0) errors.push('Properties must have at least 1 bathroom')
+
+        if (price < 75) errors.push('Price must be at least $75/night')
+
+        if (maxGuests > 16) errors.push('Properties cannot have more than 16 guests')
+
+        if (description.length < 5) errors.push('Desciprion must be at least 5 characters')
         if (description.length > 200) errors.push('Description must be less than 200 characters')
-        if (imageUrl === '') errors.push('Please provide an image')
+        
+        // if (imageUrl === '') errors.push('Please provide an image')
 
 
 
@@ -194,12 +206,13 @@ function EditProp() {
                             required
                         />
                     </label>
-                    <label>
-                        Images
+                    <label hidden ={true}>
+                        {/* Images */}
                         <input
                             type="text"
                             value={imageUrl}
-                            onChange={(e) => setImageUrl(e.target.value)}
+                            hidden={true}
+                            // onChange={(e) => setImageUrl(e.target.value)}
                             required
                         />
                     </label>

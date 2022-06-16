@@ -14,7 +14,6 @@ export const getWeather = () => async (dispatch) => {
 
     const response = await fetch('https://weatherapi-com.p.rapidapi.com/current.json?q=Big%20Bear%20Lake', options)
         // .then(response => {response.json()})
-        // .then(response => console.log(response))
         // .catch(err => console.error(err));
 
     if (response) {
