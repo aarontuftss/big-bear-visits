@@ -11,6 +11,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .filterHoler > * {
@@ -113,4 +114,26 @@
 .filterHoler > form {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.sForm > label{
+    background-color: white;
+    margin: 15px;
+    border-radius: 7px;
+}
+
+.sForm > label {
+    text-align: center;
+    color: black;
+}
+
+.sForm > label > input {
+    text-align: center;
+}
+
+.sForm > button {
+    height: 50px;
+    border-radius: 15px;
 }

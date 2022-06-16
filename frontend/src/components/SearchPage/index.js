@@ -14,8 +14,9 @@ import './SearchPage.css';
 function SearchPage() {
     const dispatch = useDispatch();
     const properties = useSelector(state => state.properties.allProperties)
-    const [filteredProp, setFilteredProp] = useState(properties)
+    const [filteredProp, setFilteredProp] = useState(Object.entries(properties))
     const key = useSelector(state => state.key)
+    const reservations = useSelector(state => state.reservations.allReservations)
 
 
     const history = useHistory()
@@ -30,11 +31,13 @@ function SearchPage() {
     const [guests, setGuests] = useState(0)
 
 
+    useEffect(() => {
+        
+    }, [filteredProp]);
 
     useEffect(() => {
         dispatch(sessionActions.restoreUser())
         .then(() => dispatch(propertyActions.getAllProperties()))
-        // .then(()=> setFilteredProp(properties))
         .then(() => gg())
         .then(()=> setIsLoaded(true))
     }, [dispatch]);
@@ -45,16 +48,6 @@ function SearchPage() {
             index[i][1]['coordinates'] = await getCoord(index[i][1].address, index[i][1].city, index[i][1].state, key)
         }
     }
-
-    // useEffect(() => {
-    //     gg()
-    //     .then(() => setIsLoaded(true));
-    // }, []);
-
-
-
-
-    // getCoord(p[1].address, p[1].city, p[1].state, key)
 
 
     if (!isLoaded){
@@ -67,15 +60,37 @@ function SearchPage() {
         )
     }
 
+    function inbetweens(start, end) {
+        for (var arr = [], dt = new Date(start); dt <= new Date(end); dt.setDate(dt.getDate() + 1)) {
+            
+            arr.push(new Date(dt));
+        }
+        return arr
+    }
 
-    // async function filter(){
-    //     setFilteredProp(
-    //         properties.filter((prop)=> {
-    //             return prop[1].id > 5
-    //         })
-    //     )
+
+    async function filter(){
+        setFilteredProp(
+            Object.entries(properties).filter((prop)=> {
+                let bookedDays = Object.entries(prop[1].Reservations).map((r)=> {console.log(r[1]);return inbetweens(r[1].startDate, r[1].endDate)}).flat()
+                // let selectedDays = inbetweens(checkIn, checkOut)
+
+                if (bookedDays.includes(checkIn)) return false
+                if (bookedDays.includes(checkOut)) return false
+
+                console.log(prop[1].bedrooms, bedrooms)
+
+                if (prop[1].bathrooms < bathrooms) return false
+
+                if (prop[1].bedrooms < bedrooms) return false
+
+                if (prop[1].maxGuests < guests) return false
+
+                return true
+            })
+        )
         
-    // }
+    }
 
 
     function SimpleMap() {
@@ -99,11 +114,16 @@ function SearchPage() {
                             zoom={13}
                             center={defaultCenter}
                         >
-                            {Object.entries(properties).map((p)=> {
+                            {/* {Object.entries(properties).map((p)=> {
                                 return (
                                     <Marker key={p[1].name} position={p[1].coordinates} url={`/propertyies/${p[1].id}`} clickable={true} onClick={()=> history.push(`/properties/${p[1].id}`)}/>
                                 )
-                            })}
+                            })} */}
+                        {filteredProp.map((p) => {
+                            return (
+                                <Marker key={p[1].name} position={p[1].coordinates} url={`/propertyies/${p[1].id}`} clickable={true} onClick={() => history.push(`/properties/${p[1].id}`)} />
+                            )
+                        })}
                         </GoogleMap>
                     </LoadScript>
                 </div>
@@ -117,22 +137,22 @@ function SearchPage() {
         {isLoaded && (
             <div className='searchPage-main'>
                 <div className='filterHoler'>
-                    <p>Find Exactly What You Need</p>
-                    <form>
-                        <label> Check In <input type='date' onChange={(e) => setCheckin(e.target.value)}></input></label>
-                            <label>Check Out<input type='date' onChange={(e) => setCheckOut(e.target.value)}></input></label>
-                            <label>Bedrooms<input type='number' placeholder='Bedrooms' onChange={(e) => setBedrooms(e.target.value)}></input></label>
-                            <label>Bathrooms<input type='number' placeholder='Bathrooms' onChange={(e) => setBathrooms(e.target.value)}></input></label>
-                            <label>Guests<input type='number' placeholder='Guests' onChange={(e) => setGuests(e.target.value)}></input></label>
+                    {/* <p style={{margin: '0px'}}>Find Exactly What You Need</p> */}
+                    <form className='sForm'>
+                        <label> Check In <input type='date' onChange={(e) => {setCheckin(e.target.value); }}></input></label>
+                            <label>Check Out<input type='date' onChange={(e) => {setCheckOut(e.target.value);  }}></input></label>
+                            <label>Bedrooms<input type='number' placeholder='# of Bedrooms' onChange={(e) => {setBedrooms(e.target.value);}}></input></label>
+                            <label>Bathrooms<input type='number' placeholder='# of Bathrooms' onChange={(e) => {setBathrooms(e.target.value); }}></input></label>
+                            <label>Guests<input type='number' placeholder='# of Guests' onChange={(e) => {setGuests(e.target.value);  }}></input></label>
                         
-                        <button onClick={((e)=> {e.preventDefault(); console.log(checkIn, checkOut, bedrooms,bathrooms,guests)})}>Filter Properties</button>
+                        <button onClick={((e)=> {e.preventDefault(); filter()})}>Update Properties</button>
                     </form>
                 </div>
 
                 <div className='resultHolder'>
 
                     <div className='rCardHold'>
-                        {Object.entries(properties).map((property)=> {
+                        {/* {Object.entries(properties).map((property)=> {
                             const image = property[1].Images[1].link ? property[1].Images[1].link : property[1].Images[0].link
                             return (
                                 <NavLink to={`/properties/${property[1].id}`} key={property[0]}>
@@ -148,7 +168,24 @@ function SearchPage() {
                                     </div>
                                 </NavLink>
                             )
-                        })}
+                        })} */}
+                            {filteredProp.map((property) => {
+                                const image = property[1].Images[1].link ? property[1].Images[1].link : property[1].Images[0].link
+                                return (
+                                    <NavLink to={`/properties/${property[1].id}`} key={property[0]}>
+                                        <div className='property1'>
+                                            <img alt='' className='cardImg' src={image}></img>
+                                            <h4>{property[1].name} - ${property[1].price}</h4>
+                                            <div className='statHolddd'>
+                                                <p>{property[1].bedrooms} Bed</p>
+                                                <p>{property[1].bathrooms} Bath</p>
+                                                <p>{property[1].maxGuests} Guests</p>
+
+                                            </div>
+                                        </div>
+                                    </NavLink>
+                                )
+                            })}
 
                     </div>
 
