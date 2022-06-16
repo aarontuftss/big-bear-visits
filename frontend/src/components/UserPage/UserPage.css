@@ -198,6 +198,9 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    overflow-x: scroll;
+    scrollbar-width: 5px;
+
 }
 
 .statHoldd > * {
