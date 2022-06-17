@@ -117,21 +117,35 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    /* width: 50%; */
 }
 
 .sForm > label{
     background-color: white;
-    margin: 15px;
+    /* margin: 15px; */
+    /* border-radius: 7px; */
+    /* width: 200px; */
+    border: solid black 1px;
     border-radius: 7px;
 }
 
 .sForm > label {
     text-align: center;
     color: black;
+    margin: 20px;
+    padding: 2px;
 }
 
 .sForm > label > input {
     text-align: center;
+    width: 150px;
+    border-radius: 0px;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    border-top: solid black 1px;
 }
 
 .sForm > button {

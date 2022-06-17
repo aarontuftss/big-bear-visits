@@ -36,6 +36,10 @@ function SearchPage() {
     }, [filteredProp]);
 
     useEffect(() => {
+        filter()
+    }, [checkIn, checkOut, bedrooms, bathrooms, guests]);
+
+    useEffect(() => {
         dispatch(sessionActions.restoreUser())
         .then(() => dispatch(propertyActions.getAllProperties()))
         .then(() => gg())
@@ -144,7 +148,7 @@ function SearchPage() {
                             <label>Bathrooms<input type='number' placeholder='# of Bathrooms' onChange={(e) => {setBathrooms(e.target.value); }}></input></label>
                             <label>Guests<input type='number' placeholder='# of Guests' onChange={(e) => {setGuests(e.target.value);  }}></input></label>
                         
-                        <button onClick={((e)=> {e.preventDefault(); filter()})}>Update Properties</button>
+                        {/* <button onClick={((e)=> {e.preventDefault(); filter()})}>Update Properties</button> */}
                     </form>
                 </div>
 
