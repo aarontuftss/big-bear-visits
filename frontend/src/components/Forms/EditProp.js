@@ -222,7 +222,7 @@ function EditProp() {
                             required
                         />
                     </label>
-                    <button type="submit">Edit Property</button>
+                    <button type="submit" className="logB">Edit Property</button>
                 </form>
             </div>
             )}

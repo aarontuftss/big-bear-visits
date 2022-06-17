@@ -193,7 +193,7 @@ function NewProp() {
                         required
                     />
                 </label>
-                <button type="submit">Submit Property</button>
+                <button type="submit" className="logB">Submit Property</button>
             </form>
         </div>
     );

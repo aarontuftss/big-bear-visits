@@ -31,8 +31,8 @@ function EditReservation() {
 
     const [state, setState] = useState([
         {
-            startDate: new Date(currentRes?.startDate),
-            endDate: new Date(currentRes?.endDate),
+            startDate: new Date(),
+            endDate: new Date (),
             key: 'selection'
         }
     ]);
@@ -49,8 +49,15 @@ function EditReservation() {
     }, [dispatch]);
 
     useEffect(() => {
-
-    }, [isLoaded]);
+        setState([
+            {
+                startDate: new Date(currentRes?.startDate),
+                endDate: new Date(currentRes?.endDate),
+                key: 'selection'
+            }
+        ])
+    }, [currentRes]);
+    
 
     useEffect(() => {
     }, [state])
@@ -114,7 +121,7 @@ function EditReservation() {
                             <DateRange
                             editableDateInputs={true}
                             minDate={new Date()}
-                            onChange={item => { setState([item.selection]); }}
+                            onChange={item => { setState([item?.selection]); }}
                             moveRangeOnFirstSelection={false}
                             ranges={state}
                             disabledDates={[...disabled]}

@@ -1,3 +1,51 @@
 .about-hero{
-    
+    height: calc(100vh - 65px);
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: maroon;
+}
+
+.languageHold{
+    width: 70vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.languageHold1 {
+    width: 10vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.languageHold1 >a> img{
+    width: 30px;
+    cursor: pointer;
+}
+
+.about-main{
+    height: calc(100vh - 65px);
+    width: 85vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: whitesmoke;
+}
+
+.textArea{
+    width:700px;
+    height: 150px;
+    border: solid black 1px;
+    text-align: center;
+    border-radius: 7px;
+}
+
+.aboutD{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
 }

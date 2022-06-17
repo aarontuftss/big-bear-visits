@@ -76,7 +76,10 @@ function App() {
             <AboutPage />
           </Route>
           <Route path="*" exact={true}>
-            <h1>404 Page</h1>
+            <div className="loaderr">
+              <h1>404 Page Not Found</h1>
+              <p>Please check your URL path & try again.</p>
+            </div>
           </Route>
         </Switch>
       )}
