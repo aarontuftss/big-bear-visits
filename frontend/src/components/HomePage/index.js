@@ -26,7 +26,7 @@ function HomePage() {
                 <div className='mid'>
                     <NavLink to={`/search`}>
                         <div className='centerBook'>
-                            <h2>Check Availability</h2>
+                            <p>Check Availability</p>
                             <img src={arrow} alt='' className='arrow1'></img>
                         </div>
                     </NavLink>

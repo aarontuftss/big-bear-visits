@@ -5,10 +5,11 @@
     align-items: center;
     justify-content: center;
     background-color: maroon;
+    overflow-y: hidden;
 }
 
 .propertyPage-main > div{
-    min-height: 90vh;
+    height: 800px;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -28,7 +29,8 @@
 
 .newResHolder{
     min-width: 30vw;
-    max-height: 30vw;
+    /* max-height: 30vw; */
+    padding: 5px;
 }
 
 .newResHolder > h2{
@@ -39,7 +41,7 @@
     width: 80%;
     border: solid black 1px;
     margin: 15px;
-    min-height: 200px;
+    /* min-height: 200px; */
     text-align: center;
     border-radius: 15px;
 }
@@ -73,4 +75,31 @@
     /* background-color: maroon; */
     /* color: white; */
     padding: 10px;
+}
+
+.bookR{
+    border: solid black 1px;
+    color: white;
+    background-color: maroon;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.bookR:hover{
+    transform: translateY(2px);
+    cursor: pointer;
+}
+
+.crudB{
+    margin: 10px;
+    padding: 5px;
+    border-radius: 3px;
+    border: solid black 1px;
+    background-color: whitesmoke;
+}
+
+.crudB:hover {
+    color: maroon;
+    border: solid maroon 1px;
+    cursor: pointer;
 }

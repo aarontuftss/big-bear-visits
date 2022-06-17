@@ -119,8 +119,8 @@ function PropertyPage(props) {
                 <div className='sect1'>
                     <h1>{property.name} - ${property.price}/night</h1>
                     <SimpleImageSlider
-                        width={850}
-                        height={450}
+                        width={550}
+                        height={350}
                         images={images}
                         showBullets={true}
                         showNavs={true}
@@ -152,13 +152,13 @@ function PropertyPage(props) {
                             {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                         </ul>
 
-                        <button type="submit">Book Your Stay</button>
+                        <button type="submit" className='bookR'>Book Your Stay</button>
                     </form>
                     <div className='crudHold'>
                         {sessionUser && sessionUser.id === property.ownerId &&(
                             <>
-                                <button onClick={handleEdit}>Edit Property</button>
-                                <button onClick={handleDelete}>Delete Property</button>
+                                <button onClick={handleEdit} className='crudB'>Edit Property</button>
+                                <button onClick={handleDelete} className='crudB'>Delete Property</button>
                             </>
                         )}
                     </div>

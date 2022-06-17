@@ -136,7 +136,7 @@ function UserPage() {
                                         <div className="profileCard" onClick={()=> history.push(`/properties/${p.id}`)} key={p?.id}>
                                             <img src={p.Images[0]?.link} alt=""></img>
                                             <div>
-                                                <h2>{p.name}</h2>
+                                                <h3>{p.name}</h3>
                                                 <div>
                                                     <p>{p.bedrooms} <img src={bedd} alt=""></img></p>
                                                     <p> {p.bathrooms} <img src={bathh} alt=""></img></p>
@@ -151,7 +151,6 @@ function UserPage() {
                             </div>
                         </div>
                         <div className="bottomm">
-                            {/* <h2>Income</h2> */}
                             <Chart properties={userProperties} />
 
                         </div>
@@ -168,7 +167,7 @@ function UserPage() {
                                             <div className="resCard" onClick={() => history.push(`/reservations/${r.id}/${r.propertyId}`)} key={r?.id}>
                                                 <img src={prop[0]?.Images[1]?.link} alt="" className="resImg"></img> 
                                                 <div>
-                                                    <h1>{prop[0]?.name} - {r.startDate.split('T')[0]}</h1>
+                                                    <h3>{prop[0]?.name} - {r.startDate.split('T')[0]}</h3>
                                                 </div>
                                             </div>
                                         )
@@ -177,7 +176,7 @@ function UserPage() {
                             </div>
 
                         </div>
-                        <div className="bottomm">
+                        <div className="bottomm1">
                                 <h2>Basic Information</h2>
                                 <div className="statHoldd">
                                     <p>Total Properties: {userProperties.length}</p>

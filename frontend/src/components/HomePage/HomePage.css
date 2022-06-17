@@ -32,8 +32,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-end;
-    padding-bottom: 15px;
+    /* justify-content: flex-end; */
 }
 
 .mainBG > h1 {
@@ -63,8 +62,8 @@
     align-items: center;
     justify-content: center;
     border: solid black 1px;
-    min-height: 300px;
-    min-width: 300px;
+    min-height: 250px;
+    min-width: 250px;
     background-color: whitesmoke;
     border-radius: 7px;
     box-shadow: 1px 1px 1px 1px black;
@@ -75,8 +74,8 @@
 }
 
 .homeCard > img {
-    width: 100px;
-    height: 100px;
+    width: 75px;
+    height: 75px;
 }
 
 
@@ -137,7 +136,7 @@
 }
 
 .arrow1 {
-    width: 40px;
+    width: 30px;
 }
 
 .mid:hover {
