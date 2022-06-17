@@ -31,8 +31,8 @@ function EditReservation() {
 
     const [state, setState] = useState([
         {
-            startDate: new Date(),
-            endDate: new Date(),
+            startDate: new Date(currentRes?.startDate),
+            endDate: new Date(currentRes?.endDate),
             key: 'selection'
         }
     ]);
@@ -56,6 +56,7 @@ function EditReservation() {
     }, [state])
 
     function inbetweens(start, end) {
+        if (currentRes?.startDate === start && currentRes?.endDate === end) return false
         for (var arr = [], dt = new Date(start); dt <= new Date(end); dt.setDate(dt.getDate() + 1)) {
             disabled.push(new Date(dt))
             arr.push(new Date(dt));
