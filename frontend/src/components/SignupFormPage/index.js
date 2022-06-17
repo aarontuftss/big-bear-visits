@@ -25,13 +25,15 @@ function SignupFormPage() {
         let errors = []
         const emailR = /^\S+@\S+\.\S+$/g
 
-        const passR = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/g
+        // const passR = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/g
+
+        const passR = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/g
 
         if(!email.match(emailR)) errors.push('Please provide a valid email')
 
         if(username.length > 50) errors.push('Username must be less than 50 characters')
 
-        if (!password.match(passR)) errors.push('Passowrd must be 8 characters, include 1 letter, and 1 number')
+        if (!password.match(passR)) errors.push('Password must be 8 characters, include 1 letter, 1 number, and a special character')
 
 
         

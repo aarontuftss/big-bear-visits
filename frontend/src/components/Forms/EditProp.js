@@ -59,13 +59,19 @@ function EditProp() {
 
         if (price < 75) errors.push('Price must be at least $75/night')
 
-        if (maxGuests > 16) errors.push('Properties cannot have more than 16 guests')
-
+        
         if (description.length < 5) errors.push('Desciprion must be at least 5 characters')
         if (description.length > 200) errors.push('Description must be less than 200 characters')
         
         // if (imageUrl === '') errors.push('Please provide an image')
+        
+        //max constraints
 
+        if (price > 2000) errors.push('Price must be under $2,000 / night')
+        if (bedrooms > 15) errors.push('Must have less than 15 bedrooms')
+        if (bathrooms > 15) errors.push('Must have less than 15 bathrooms')
+        if (maxGuests > 16) errors.push('Properties cannot have more than 16 guests')
+        
 
 
         return errors;
