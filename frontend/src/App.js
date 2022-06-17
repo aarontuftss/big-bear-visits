@@ -18,6 +18,7 @@ import HomePage from "./components/HomePage";
 import SearchPage from "./components/SearchPage";
 import PropertyPage from "./components/PropertyPage";
 import UserPage from "./components/UserPage";
+import AboutPage from "./components/About";
 
 function App() {
   const dispatch = useDispatch();
@@ -72,7 +73,7 @@ function App() {
             <EditReservation />
           </Route>
           <Route path="/about" exact={true}>
-            <h1>About Page</h1>
+            <AboutPage />
           </Route>
           <Route path="*" exact={true}>
             <h1>404 Page</h1>

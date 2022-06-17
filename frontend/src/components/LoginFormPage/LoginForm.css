@@ -12,7 +12,7 @@
 }
 
 .fBG{
-    height: 92.5vh;
+    height: calc(100vh - 65px);
     background-color: maroon;
     display: flex;
     align-items: center;

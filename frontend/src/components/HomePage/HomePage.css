@@ -1,6 +1,5 @@
 .homePage-main{
-    max-height: 92.5vh;
-    min-height: 92.5vh;
+    height: calc(100vh - 65px);
     /* background-color: black; */
     display: flex;
     flex-direction: column;

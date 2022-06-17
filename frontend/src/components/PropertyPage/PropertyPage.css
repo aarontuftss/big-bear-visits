@@ -1,6 +1,5 @@
 .propertyPage-main{
-    min-height: 85vh;
-    height: 92.5vh;
+    height: calc(100vh - 65px);
     display: flex;
     flex-direction: row;
     align-items: center;

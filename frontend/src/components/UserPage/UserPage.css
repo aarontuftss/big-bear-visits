@@ -1,5 +1,5 @@
 .profileWrap{
-    height: calc(92.5vh - 70px);
+    height: calc(100vh - 65px - 70px);
     display: flex;
     flex-direction: column;
     align-items: center;

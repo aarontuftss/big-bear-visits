@@ -1,12 +1,12 @@
 .searchPage-main{
-    height: 92.5vh;
+    height: calc(100vh - 65px);
     width: 100vw;
     display: flex;
     flex-direction: column;
 }
 
 .filterHoler{
-    height: 110px;
+    height: 80px;
     width: 100%;
     background-color: maroon;
     display: flex;
@@ -22,12 +22,12 @@
 .resultHolder{
     display: flex;
     flex-direction: row;
+    height: calc(100vh - 65px - 80px);
 }
 
 .rCardHold{
     width: 60vw;
-    height: calc(90vh - 150px);
-    max-height: calc(90vh - 150px);
+    height: calc(100vh - 65px - 80px);
     overflow-y: scroll;
     border: solid black 1px;
     box-sizing: border-box;
@@ -41,7 +41,7 @@
 
 .mapholder{
     width: 40vw;
-    height: calc(90vh - 150px);
+    height: calc(100vh - 65px - 80px);
     border: solid black 1px;
     box-sizing: border-box;
 
