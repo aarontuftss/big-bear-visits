@@ -72,15 +72,38 @@ function SearchPage() {
         return arr
     }
 
+    function inbetweens1(start, end) {
+        for (var arr = [], dt = new Date(new Date(start).getTime() + 86400000); dt <= new Date(new Date(end).getTime() + 86400000); dt.setDate(dt.getDate() + 1)) {
+
+            arr.push(new Date(dt));
+        }
+        return arr
+    }
+
 
     async function filter(){
         setFilteredProp(
             Object.entries(properties).filter((prop)=> {
                 let bookedDays = Object.entries(prop[1].Reservations).map((r)=> {return inbetweens(r[1].startDate, r[1].endDate)}).flat()
-                // let selectedDays = inbetweens(checkIn, checkOut)
+                let selectedDays = inbetweens1(checkIn, checkOut)
 
-                if (bookedDays.includes(checkIn)) return false
-                if (bookedDays.includes(checkOut)) return false
+                console.log(selectedDays)
+                for(let i = 0; i < bookedDays.length; i++){
+                    if (bookedDays[i].setHours(0, 0, 0, 0) === new Date(new Date(checkIn).getTime() + 86400000).setHours(0,0,0,0)) return false
+                    if (bookedDays[i].setHours(0, 0, 0, 0) === new Date(new Date(checkOut).getTime() + 86400000).setHours(0,0,0,0)) return false
+
+                    if (selectedDays.length){
+                        for (let j = 0; j < selectedDays.length; j++){
+                            if (bookedDays[i].setHours(0, 0, 0, 0) === selectedDays[j].setHours(0, 0, 0, 0)) return false
+                        }
+                    }
+
+                }
+
+                // bookedDays.forEach((d)=> {
+                //     selectedDays.forEach((sD)=> {if (d.setHours(0,0,0,0) === sD.setHours(0,0,0,0)) return false})
+                // })
+
 
 
                 if (prop[1].bathrooms < bathrooms) return false
@@ -142,11 +165,11 @@ function SearchPage() {
                 <div className='filterHoler'>
                     {/* <p style={{margin: '0px'}}>Find Exactly What You Need</p> */}
                     <form className='sForm'>
-                        <label> Check In <input type='date' onChange={(e) => {setCheckin(e.target.value); }}></input></label>
-                            <label>Check Out<input type='date' onChange={(e) => {setCheckOut(e.target.value);  }}></input></label>
-                            <label>Bedrooms<input type='number' placeholder='# of Bedrooms' onChange={(e) => {setBedrooms(e.target.value);}}></input></label>
-                            <label>Bathrooms<input type='number' placeholder='# of Bathrooms' onChange={(e) => {setBathrooms(e.target.value); }}></input></label>
-                            <label>Guests<input type='number' placeholder='# of Guests' onChange={(e) => {setGuests(e.target.value);  }}></input></label>
+                        <label> Check In <input type='date' value={checkIn} onChange={(e) => {setCheckin(e.target.value); }}></input></label>
+                            <label>Check Out<input type='date' value={checkOut} onChange={(e) => {setCheckOut(e.target.value);  }}></input></label>
+                            <label>Bedrooms<input type='number' placeholder='# of Bedrooms' value={bedrooms} onChange={(e) => {setBedrooms(e.target.value);}}></input></label>
+                            <label>Bathrooms<input type='number' placeholder='# of Bathrooms' value={bathrooms} onChange={(e) => {setBathrooms(e.target.value); }}></input></label>
+                            <label>Guests<input type='number' placeholder='# of Guests' value={guests} onChange={(e) => {setGuests(e.target.value);  }}></input></label>
                         
                         {/* <button onClick={((e)=> {e.preventDefault(); filter()})}>Update Properties</button> */}
                     </form>
