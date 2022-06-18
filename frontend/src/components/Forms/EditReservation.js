@@ -60,6 +60,13 @@ function EditReservation() {
     
 
     useEffect(() => {
+        setDisabled([])
+        property?.Reservations.map((r) => {
+            return inbetweens(r.startDate, r.endDate)
+        })
+    }, [property]);
+
+    useEffect(() => {
     }, [state])
 
     function inbetweens(start, end) {
