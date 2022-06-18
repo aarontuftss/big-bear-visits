@@ -31,9 +31,10 @@ function SearchPage() {
     const [guests, setGuests] = useState(0)
 
 
+
     useEffect(() => {
-        
     }, [filteredProp]);
+    
 
     useEffect(() => {
         filter()
@@ -43,6 +44,7 @@ function SearchPage() {
         dispatch(sessionActions.restoreUser())
         .then(() => dispatch(propertyActions.getAllProperties()))
         .then(() => gg())
+        .then(() => filter())
         .then(()=> setIsLoaded(true))
     }, [dispatch]);
 
@@ -87,7 +89,6 @@ function SearchPage() {
                 let bookedDays = Object.entries(prop[1].Reservations).map((r)=> {return inbetweens(r[1].startDate, r[1].endDate)}).flat()
                 let selectedDays = inbetweens1(checkIn, checkOut)
 
-                console.log(selectedDays)
                 for(let i = 0; i < bookedDays.length; i++){
                     if (bookedDays[i].setHours(0, 0, 0, 0) === new Date(new Date(checkIn).getTime() + 86400000).setHours(0,0,0,0)) return false
                     if (bookedDays[i].setHours(0, 0, 0, 0) === new Date(new Date(checkOut).getTime() + 86400000).setHours(0,0,0,0)) return false
@@ -99,12 +100,6 @@ function SearchPage() {
                     }
 
                 }
-
-                // bookedDays.forEach((d)=> {
-                //     selectedDays.forEach((sD)=> {if (d.setHours(0,0,0,0) === sD.setHours(0,0,0,0)) return false})
-                // })
-
-
 
                 if (prop[1].bathrooms < bathrooms) return false
 
@@ -140,11 +135,6 @@ function SearchPage() {
                             zoom={13}
                             center={defaultCenter}
                         >
-                            {/* {Object.entries(properties).map((p)=> {
-                                return (
-                                    <Marker key={p[1].name} position={p[1].coordinates} url={`/propertyies/${p[1].id}`} clickable={true} onClick={()=> history.push(`/properties/${p[1].id}`)}/>
-                                )
-                            })} */}
                         {filteredProp.map((p) => {
                             return (
                                 <Marker key={p[1].name} position={p[1].coordinates} url={`/propertyies/${p[1].id}`} clickable={true} onClick={() => history.push(`/properties/${p[1].id}`)} />

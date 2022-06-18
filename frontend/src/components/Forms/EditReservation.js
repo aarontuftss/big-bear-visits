@@ -81,6 +81,10 @@ function EditReservation() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (new Date(currentRes?.startDate) < new Date()) {setErrors(['* Cannot Change Active / Previous Reservations *']); return}
+
+        if (new Date(currentRes?.startDate).setHours(0,0,0,0) === new Date().setHours(0,0,0,0)) {setErrors(['* Cannot Change Active Reservations *']); return}
+
         const data = {
             propertyId: currentRes.propertyId,
             renterId: currentRes.renterId,
@@ -94,6 +98,11 @@ function EditReservation() {
     };
 
     const handleDelete = async () => {
+
+        if (new Date(currentRes?.startDate) < new Date()) {setErrors(['* Cannot Cancel Active / Previous Reservations *']); return}
+
+        if (new Date(currentRes?.startDate).setHours(0, 0, 0, 0) === new Date().setHours(0, 0, 0, 0)) { setErrors(['* Cannot Cancel Active Reservations *']); return }
+
 
         await dispatch(reservationActions.deleteReservation(id))
         history.push(`/users/${sessionUser.id}`)
