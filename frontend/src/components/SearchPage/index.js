@@ -153,38 +153,18 @@ function SearchPage() {
         {isLoaded && (
             <div className='searchPage-main'>
                 <div className='filterHoler'>
-                    {/* <p style={{margin: '0px'}}>Find Exactly What You Need</p> */}
                     <form className='sForm'>
                         <label> Check In <input type='date' value={checkIn} onChange={(e) => {setCheckin(e.target.value); }}></input></label>
                             <label>Check Out<input type='date' value={checkOut} onChange={(e) => {setCheckOut(e.target.value);  }}></input></label>
                             <label>Bedrooms<input type='number' placeholder='# of Bedrooms' value={bedrooms} onChange={(e) => {setBedrooms(e.target.value);}}></input></label>
                             <label>Bathrooms<input type='number' placeholder='# of Bathrooms' value={bathrooms} onChange={(e) => {setBathrooms(e.target.value); }}></input></label>
                             <label>Guests<input type='number' placeholder='# of Guests' value={guests} onChange={(e) => {setGuests(e.target.value);  }}></input></label>
-                        
-                        {/* <button onClick={((e)=> {e.preventDefault(); filter()})}>Update Properties</button> */}
                     </form>
                 </div>
 
                 <div className='resultHolder'>
 
                     <div className='rCardHold'>
-                        {/* {Object.entries(properties).map((property)=> {
-                            const image = property[1].Images[1].link ? property[1].Images[1].link : property[1].Images[0].link
-                            return (
-                                <NavLink to={`/properties/${property[1].id}`} key={property[0]}>
-                                    <div className='property1'>
-                                        <img alt='' className='cardImg' src={image}></img>
-                                        <h4>{property[1].name} - ${property[1].price}</h4>
-                                        <div className='statHolddd'>
-                                            <p>{property[1].bedrooms} Bed</p>
-                                            <p>{property[1].bathrooms} Bath</p>
-                                            <p>{property[1].maxGuests} Guests</p>
-
-                                        </div>
-                                    </div>
-                                </NavLink>
-                            )
-                        })} */}
                             {filteredProp.map((property) => {
                                 const image = property[1]?.Images[0].link ? property[1].Images[0].link : "https://www.destinationbigbear.com/media/images/HiddenWolfRetreat/2000/00100.jpg"
                                 return (
