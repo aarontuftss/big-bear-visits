@@ -78,10 +78,6 @@ function NewProp() {
         
         if ( bathrooms === '' || bedrooms === '' || maxGuests === '') errors.push('Please provide valid number of bedrooms, bathrooms, & guests')
         
-        if (bathrooms === 0 ) errors.push('Properties must have at least 1 bathroom')
-
-        if(price < 75) errors.push('Price must be at least $75/night')
-
         
         if (description.length < 5) errors.push('Desciprion must be at least 5 characters')
         if (description.length > 200) errors.push('Description must be less than 200 characters')
@@ -92,6 +88,12 @@ function NewProp() {
         if (bedrooms > 15) errors.push('Must have less than 15 bedrooms')
         if (bathrooms > 15) errors.push('Must have less than 15 bathrooms')
         if(maxGuests > 16) errors.push('Properties cannot have more than 16 guests')
+
+        //min constraints
+        if (price < 75) errors.push('Price must be at least $75/night')
+        if (bedrooms < 1) errors.push('Property must have at least 1 bedroom')
+        if (bathrooms < 1) errors.push('Property must have at least 1 bathroom')
+        if (maxGuests < 1) errors.push('Property must allow at least 1 guest')
 
 
 
