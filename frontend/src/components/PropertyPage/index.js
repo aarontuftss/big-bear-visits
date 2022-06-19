@@ -87,9 +87,9 @@ function PropertyPage(props) {
     async function handleDelete(e){
         e.preventDefault();
         await dispatch(propertyActions.deleteProperty(property.id))
-        .then(() => dispatch(propertyActions.getAllProperties()))
-        .then(()=> dispatch(reservationActions.getAllReservations()))
-        history.push(`/users/${sessionUser.id}`)
+            .then(() => dispatch(propertyActions.getAllProperties()))
+            .then(()=> dispatch(reservationActions.getAllReservations()))
+            .then(()=> history.push(`/users/${sessionUser.id}`))
     }
 
     if(!isLoaded){

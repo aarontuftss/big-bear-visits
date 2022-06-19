@@ -93,8 +93,8 @@ export const deleteProperty = (propertyId) => async (dispatch) => {
     }); // DO WE NEED TO REMOVE CSRF?
 
     if (response.ok) {
-        dispatch(deletePropertyAction(propertyId))
-        return true;
+        return await dispatch(deletePropertyAction(propertyId))
+        // return true;
     }
 }
 

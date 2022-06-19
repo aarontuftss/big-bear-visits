@@ -93,7 +93,7 @@ export const deleteReservation = (reservationId) => async (dispatch) => {
     }); // DO WE NEED TO REMOVE CSRF?
 
     if (response.ok) {
-        dispatch(deleteReservationAction(reservationId))
+        await dispatch(deleteReservationAction(reservationId))
         return true;
     }
 }
