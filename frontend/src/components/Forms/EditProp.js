@@ -218,7 +218,7 @@ function EditProp() {
                             type="text"
                             value={imageUrl}
                             hidden={true}
-                            // onChange={(e) => setImageUrl(e.target.value)}
+                            onChange={(e) => setImageUrl(e.target.value)}
                             required
                         />
                     </label>

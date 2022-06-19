@@ -164,8 +164,7 @@ function UserPage() {
                             <div className="profileScroll">
                                     {userReservations.map((r) => {
                                         const prop = visitedProps.filter((p)=> {return p.id === r.propertyId})
-                                        console.log(prop[0])
-                                        if(prop[0]?.name === undefined) return <></>
+                                        if(prop[0]?.name === undefined) return <p key={r.id} visible='false' style={{height:'0px' , margin:'0px' , padding:'0px'}} onClick={(e)=> {e.preventDefault()}}></p>
                                         return (
                                             <div className="resCard" onClick={() => history.push(`/reservations/${r.id}/${r.propertyId}`)} key={r?.id}>
                                                 <img src={prop[0]?.Images[1]?.link} alt="" className="resImg"></img> 

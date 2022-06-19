@@ -149,6 +149,10 @@
 }
 
 .sForm > button {
-    height: 50px;
+    padding: 15px;
     border-radius: 15px;
+    background-color: maroon;
+    color: white;
+    border: solid white 3px;
+    cursor: pointer;
 }
