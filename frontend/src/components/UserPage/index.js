@@ -26,6 +26,8 @@ function UserPage() {
 
     const [isLoaded, setIsLoaded] = useState(false)
 
+
+
     function inbetweens(start, end) {
         for (var arr = [], dt = new Date(start); dt <= new Date(end); dt.setDate(dt.getDate() + 1)) {
             arr.push(new Date(dt));
@@ -162,7 +164,8 @@ function UserPage() {
                             <div className="profileScroll">
                                     {userReservations.map((r) => {
                                         const prop = visitedProps.filter((p)=> {return p.id === r.propertyId})
-                                        
+                                        console.log(prop[0])
+                                        if(prop[0]?.name === undefined) return <></>
                                         return (
                                             <div className="resCard" onClick={() => history.push(`/reservations/${r.id}/${r.propertyId}`)} key={r?.id}>
                                                 <img src={prop[0]?.Images[1]?.link} alt="" className="resImg"></img> 
