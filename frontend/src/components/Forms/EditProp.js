@@ -33,6 +33,8 @@ function EditProp() {
 
     const [isLoaded, setIsLoaded] = useState(false)
 
+    const key = useSelector(state => state.key)
+
 
     useEffect(() => {
         pageSetup()

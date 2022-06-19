@@ -36,8 +36,8 @@ function SearchPage() {
 
 
 
-    // useEffect(() => {
-    // }, [filteredProp]);
+    useEffect(() => {
+    }, [filteredProp]);
     
 
     // useEffect(() => {
@@ -107,26 +107,27 @@ function SearchPage() {
     async function filter(){
         setFilteredProp(
             Object.entries(properties).filter((prop)=> {
-                let bookedDays = Object.entries(prop[1].Reservations).map((r)=> {return inbetweens(r[1].startDate, r[1].endDate)}).flat()
-                let selectedDays = inbetweens1(checkIn, checkOut)
+                if (prop[0] === 'undefined') return false
+                // let bookedDays = Object.entries(prop[1].Reservations ? prop[1].Reservations : []).map((r)=> {return inbetweens(r[1].startDate, r[1].endDate)}).flat()
+                // let selectedDays = inbetweens1(checkIn, checkOut)
 
-                for(let i = 0; i < bookedDays.length; i++){
-                    if (bookedDays[i].setHours(0, 0, 0, 0) === new Date(new Date(checkIn).getTime() + 86400000).setHours(0,0,0,0)) return false
-                    if (bookedDays[i].setHours(0, 0, 0, 0) === new Date(new Date(checkOut).getTime() + 86400000).setHours(0,0,0,0)) return false
+                // for(let i = 0; i < bookedDays.length; i++){
+                //     if (bookedDays[i].setHours(0, 0, 0, 0) === new Date(new Date(checkIn).getTime() + 86400000).setHours(0,0,0,0)) return false
+                //     if (bookedDays[i].setHours(0, 0, 0, 0) === new Date(new Date(checkOut).getTime() + 86400000).setHours(0,0,0,0)) return false
 
-                    if (selectedDays.length){
-                        for (let j = 0; j < selectedDays.length; j++){
-                            if (bookedDays[i].setHours(0, 0, 0, 0) === selectedDays[j].setHours(0, 0, 0, 0)) return false
-                        }
-                    }
+                //     if (selectedDays.length){
+                //         for (let j = 0; j < selectedDays.length; j++){
+                //             if (bookedDays[i].setHours(0, 0, 0, 0) === selectedDays[j].setHours(0, 0, 0, 0)) return false
+                //         }
+                //     }
 
-                }
+                // }
 
-                if (prop[1].bathrooms < bathrooms) return false
+                // if (prop[1].bathrooms < bathrooms) return false
 
-                if (prop[1].bedrooms < bedrooms) return false
+                // if (prop[1].bedrooms < bedrooms) return false
 
-                if (prop[1].maxGuests < guests) return false
+                // if (prop[1].maxGuests < guests) return false
 
                 return true
             })
@@ -138,6 +139,7 @@ function SearchPage() {
     async function filter1() {
         setFilteredProp(
             Object.entries(properties).filter((prop) => {
+                if (prop[0] === 'undefined') return false
                 let bookedDays = Object.entries(prop[1].Reservations).map((r) => { return inbetweens(r[1].startDate, r[1].endDate) }).flat()
                 let selectedDays = inbetweens1(filterObj.checkIn, filterObj.checkOut)
 
@@ -239,7 +241,7 @@ function SearchPage() {
 
                     <div className='rCardHold'>
                             {filteredProp.map((property) => {
-                                const image = property[1]?.Images[0].link ? property[1].Images[0].link : "https://www.destinationbigbear.com/media/images/HiddenWolfRetreat/2000/00100.jpg"
+                                const image = property[1]?.Images[0]?.link ? property[1].Images[0]?.link : "https://www.destinationbigbear.com/media/images/HiddenWolfRetreat/2000/00100.jpg"
                                 return (
                                     <NavLink to={`/properties/${property[1].id}`} key={property[0]}>
                                         <div className='property1'>

@@ -167,7 +167,7 @@ function UserPage() {
                                         if(prop[0]?.name === undefined) return <p key={r.id} visible='false' style={{height:'0px' , margin:'0px' , padding:'0px'}} onClick={(e)=> {e.preventDefault()}}></p>
                                         return (
                                             <div className="resCard" onClick={() => history.push(`/reservations/${r.id}/${r.propertyId}`)} key={r?.id}>
-                                                <img src={prop[0]?.Images[1]?.link} alt="" className="resImg"></img> 
+                                                <img src={prop[0]?.Images[0]?.link} alt="" className="resImg"></img> 
                                                 <div>
                                                     <h3>{prop[0]?.name} - {r.startDate.split('T')[0]}</h3>
                                                 </div>

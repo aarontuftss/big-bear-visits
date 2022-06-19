@@ -25,6 +25,8 @@ function NewProp() {
 
     const [errors, setErrors] = useState([]);
 
+    // const key = useSelector(state => state.key)
+
     useEffect(() => {
     }, [errors])
 
@@ -59,8 +61,21 @@ function NewProp() {
         }
     };
 
+    // async function getCoord(address1, city1, state1) {
+    //     const addy = `${address1.split(' ').join('+')},+${city1},+${state1}`
+    //     const url = `https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=${key}`
+    //     const url1 = `https://maps.googleapis.com/maps/api/geocode/json?address=${addy}&key=${key}`
+    //     const response = await fetch(url1)
 
-    const validateErrors = () => {
+    //     if (response.ok) {
+    //         const data = await response.json();
+    //         const newAddy = data.results[0].geometry.location
+    //         return newAddy;
+    //     }
+    // }
+
+
+    const validateErrors = async () => {
         let errors = []
 
         let addresRegex = /^[0-9]* .*/g
@@ -96,7 +111,7 @@ function NewProp() {
         if (maxGuests < 1) errors.push('Property must allow at least 1 guest')
 
 
-
+        // await getCoord(address, city, state)
         // if (imageUrl === '') errors.push('Please provide an image')
         return errors;
     }
