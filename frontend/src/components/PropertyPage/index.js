@@ -67,16 +67,19 @@ function PropertyPage(props) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!sessionUser) history.push("/login")
-
-        const data = {
-            propertyId: id,
-            renterId: sessionUser.id,
-            startDate: state[0].startDate,
-            endDate: state[0].endDate
+        if (!sessionUser) {
+            history.push("/login")
+        }else{
+            const data = {
+                propertyId: id,
+                renterId: sessionUser.id,
+                startDate: state[0].startDate,
+                endDate: state[0].endDate
+            }
+            await dispatch(reservationActions.uploadNewReservation(data))
+                .then(() => history.push(`/users/${sessionUser.id}`))
         }
-        await dispatch(reservationActions.uploadNewReservation(data))
-            .then(() => history.push(`/users/${sessionUser.id}`))
+
 
     };
 
@@ -84,11 +87,11 @@ function PropertyPage(props) {
         history.push(`/properties/${property.id}/edit`)
     }
 
-    async function handleDelete(){
-        // e.preventDefault();
+    async function handleDelete(e){
+        e.preventDefault();
         await dispatch(propertyActions.deleteProperty(property.id))
-            .then(() => dispatch(propertyActions.getAllProperties()))
-            .then(()=> dispatch(reservationActions.getAllReservations()))
+            .then(async() => await dispatch(propertyActions.getAllProperties()))
+            .then(async ()=> await dispatch(reservationActions.getAllReservations()))
             .then(()=> history.push(`/users/${sessionUser.id}`))
     }
 
@@ -157,8 +160,8 @@ function PropertyPage(props) {
                     <div className='crudHold'>
                         {sessionUser && sessionUser.id === property.ownerId &&(
                             <>
-                                <button onClick={handleEdit} className='crudB'>Edit Property</button>
-                                <button onClick={handleDelete} className='crudB'>Delete Property</button>
+                                <button onClick={(e) => handleEdit(e)} className='crudB'>Edit Property</button>
+                                <button onClick={(e)=> handleDelete(e)} className='crudB'>Delete Property</button>
                             </>
                         )}
                     </div>

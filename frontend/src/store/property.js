@@ -93,8 +93,8 @@ export const deleteProperty = (propertyId) => async (dispatch) => {
     }); // DO WE NEED TO REMOVE CSRF?
 
     if (response.ok) {
-        return await dispatch(deletePropertyAction(propertyId))
-        // return true;
+        await dispatch(deletePropertyAction(propertyId))
+        return true
     }
 }
 
@@ -132,7 +132,13 @@ const propertyReducer = (state = initialState, action) => {
             return newState;
         case DELETE_PROPERTY:
             newState = Object.assign({}, state);
-            delete newState.allProperties[action.propertyId];
+            delete newState.allProperties[`${action.propertyId}`];
+            Object.keys(newState.allProperties)
+                .forEach(key => {
+                    if (key === action.propertyId){
+                        delete newState.allProperties[key]
+                    }
+                })
             return newState;
         default:
             return state;

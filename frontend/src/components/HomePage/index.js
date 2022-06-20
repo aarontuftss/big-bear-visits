@@ -55,7 +55,7 @@ function HomePage() {
                 <NavLink to={'/about'}><div className='homeCard'>
                     <img src={about} alt=''></img>
                     <p>About</p>
-                    <p>Hi, learn about the developer & this project. Thank you for visiting !</p>
+                    <p>Hi, learn about the developer & this project. Thank you for visiting!</p>
                     </div></NavLink>
 
             </div>
