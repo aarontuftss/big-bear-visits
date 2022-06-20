@@ -1,6 +1,6 @@
 # Welcome To Big Bear Visits
 
-Big Bear Visits is a vacation rental platform where users can upload & rent property located in Big Bear Lake, California. Listing properties on our site helps friends and families enjoy a getaway to beautiful Big Bear Lake. Sign up today & get started with Big Bear Visits.
+Big Bear Visits is a vacation rental platform where users can upload & rent properties located in Big Bear Lake, California. Listing properties on our site helps friends and families enjoy a getaway to beautiful Big Bear Lake. Sign up today & get started with Big Bear Visits.
 
 <a href='https://big-bear-visits.herokuapp.com/' target='_blank'>Visit Live Demo</a>
 
@@ -9,7 +9,7 @@ Big Bear Visits is a vacation rental platform where users can upload & rent prop
 ## Big Bear Visits Allows Users to Rent their Property or Book Reservations
 ### List of Top Features
 * Upload, edit, and delete properties
-* Book, edit, and cancel reservatons
+* Book, edit, and cancel reservations
 * Filter properties to your exact needs
 * Access statistics like 'total income' on your available properties
 
