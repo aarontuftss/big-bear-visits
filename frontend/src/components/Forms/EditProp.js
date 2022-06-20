@@ -44,6 +44,10 @@ function EditProp() {
     // }, [])
 
     useEffect(() => {
+        pageSetup()
+    }, [propertyInfo])
+
+    useEffect(() => {
         dispatch(propertyActions.getAllProperties())
         .then(()=> setPropertyInfo(
             Object.entries(properties).filter((p) => {
