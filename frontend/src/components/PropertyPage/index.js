@@ -84,8 +84,8 @@ function PropertyPage(props) {
         history.push(`/properties/${property.id}/edit`)
     }
 
-    async function handleDelete(e){
-        e.preventDefault();
+    async function handleDelete(){
+        // e.preventDefault();
         await dispatch(propertyActions.deleteProperty(property.id))
             .then(() => dispatch(propertyActions.getAllProperties()))
             .then(()=> dispatch(reservationActions.getAllReservations()))
