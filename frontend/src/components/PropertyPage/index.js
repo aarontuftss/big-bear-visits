@@ -90,7 +90,7 @@ function PropertyPage(props) {
     async function handleDelete(e){
         e.preventDefault();
         const result = await dispatch(propertyActions.deleteProperty(property.id))
-        if (result) history.push(`/`)
+        if (result) history.push(`/search`)
     }
 
     if(!isLoaded){
