@@ -89,10 +89,8 @@ function PropertyPage(props) {
 
     async function handleDelete(e){
         e.preventDefault();
-        await dispatch(propertyActions.deleteProperty(property.id))
-            .then(async() => await dispatch(propertyActions.getAllProperties()))
-            .then(async ()=> await dispatch(reservationActions.getAllReservations()))
-            .then(()=> history.push(`/users/${sessionUser.id}`))
+        const result = await dispatch(propertyActions.deleteProperty(property.id))
+        if (result) history.push(`/`)
     }
 
     if(!isLoaded){
@@ -102,11 +100,7 @@ function PropertyPage(props) {
             </div>
         )
     }
-
-    // if (!property.name) {
-    //     history.push('/search')
-    // }
-
+    
     const images = property.Images.map((image) => {
             return image.link
         })
