@@ -13,9 +13,9 @@ function EditProp() {
     const properties = useSelector((state) => state.properties.allProperties)
     const { propertyId } = useParams()
 
-    const propertyInfo = Object.entries(properties).filter((p) => {
-        return p[1].id === parseInt(propertyId)
-    })
+    // const propertyInfo = Object.entries(properties).filter((p) => {
+    //     return p[1].id === parseInt(propertyId)
+    // })
 
     const [price, setPrice] = useState('');
     const [name, setName] = useState('');
@@ -30,15 +30,28 @@ function EditProp() {
     const [images, setImages] = useState([]);
     const [errors, setErrors] = useState([]);
 
+    const [propertyInfo, setPropertyInfo] = useState(Object.entries(properties).filter((p) => {
+        return p[1].id === parseInt(propertyId)
+    }))
 
     const [isLoaded, setIsLoaded] = useState(false)
 
     const key = useSelector(state => state.key)
 
 
+    // useEffect(() => {
+    //     pageSetup()
+    // }, [])
+
     useEffect(() => {
-        pageSetup()
-    }, [])
+        dispatch(propertyActions.getAllProperties())
+        .then(()=> setPropertyInfo(
+            Object.entries(properties).filter((p) => {
+                return p[1].id === parseInt(propertyId)
+            })
+        ))
+        .then(()=> pageSetup())
+    }, [dispatch])
 
     const validateErrors = async() => {
         let errors = []
@@ -80,7 +93,7 @@ function EditProp() {
     }
 
     function pageSetup() {
-        if (sessionUser.id !== propertyInfo[0][1].ownerId) {
+        if (sessionUser.id !== propertyInfo[0][1]?.ownerId) {
             history.push('/search')
         }
         setPrice(propertyInfo[0][1].price);
