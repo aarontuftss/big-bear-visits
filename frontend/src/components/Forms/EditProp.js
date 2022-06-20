@@ -40,7 +40,7 @@ function EditProp() {
         pageSetup()
     }, [])
 
-    const validateErrors = () => {
+    const validateErrors = async() => {
         let errors = []
 
         let addresRegex = /^[0-9]* .*/g
@@ -58,7 +58,7 @@ function EditProp() {
         if (bathrooms === '' || bedrooms === '' || maxGuests === '') errors.push('Please provide valid number of bedrooms, bathrooms, & guests')
         
         
-        if (description.length < 5) errors.push('Desciprion must be at least 5 characters')
+        if (description.length < 5) errors.push('Desciption must be at least 5 characters')
         if (description.length > 200) errors.push('Description must be less than 200 characters')
         
         // if (imageUrl === '') errors.push('Please provide an image')
@@ -117,7 +117,7 @@ function EditProp() {
             imageUrl: imageUrl
         }
 
-        let validations = validateErrors()
+        let validations = await validateErrors()
 
         if (!validations.length) {
             await dispatch(propertyActions.editProperty(data))

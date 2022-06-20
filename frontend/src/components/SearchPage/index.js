@@ -216,7 +216,7 @@ function SearchPage() {
                     </form> */}
                         <form className='sForm'>
                             <label> Check In <input type='date' min={today} onChange={(e) => { filterObj.checkIn = e.target.value }}></input></label>
-                            <label>Check Out<input type='date' onChange={(e) => { filterObj.checkOut = e.target.value}}></input></label>
+                            <label>Check Out<input type='date' min={today} onChange={(e) => { filterObj.checkOut = e.target.value}}></input></label>
                             <label>Bedrooms<input type='number' placeholder='# of Bedrooms'  min={0} onChange={(e) => { 
                                 if(!e.target.value > 0) {e.target.value= 0};
                                 if (e.target.value > 25) { e.target.value = 25 };

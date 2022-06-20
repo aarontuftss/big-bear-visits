@@ -50,7 +50,7 @@ function NewProp() {
             imageUrl: imageUrl
         }
 
-        let validations = validateErrors()
+        let validations = await validateErrors()
 
         if (!validations.length){
             await dispatch(propertyActions.uploadNewProperty(data))
@@ -94,7 +94,7 @@ function NewProp() {
         if ( bathrooms === '' || bedrooms === '' || maxGuests === '') errors.push('Please provide valid number of bedrooms, bathrooms, & guests')
         
         
-        if (description.length < 5) errors.push('Desciprion must be at least 5 characters')
+        if (description.length < 5) errors.push('Desciption must be at least 5 characters')
         if (description.length > 200) errors.push('Description must be less than 200 characters')
         
         //max constraints
