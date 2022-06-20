@@ -18,14 +18,13 @@ function SearchPage() {
     const key = useSelector(state => state.key)
     const reservations = useSelector(state => state.reservations.allReservations)
 
-    const filterObj = {}
-
-
+    
+    
     const history = useHistory()
-
+    
     const [isLoaded, setIsLoaded] = useState(false);
 
-
+    
     const [checkIn, setCheckin] = useState('')
     const [checkOut, setCheckOut] = useState('')
     const [bedrooms, setBedrooms] = useState(0)
@@ -33,7 +32,14 @@ function SearchPage() {
     const [guests, setGuests] = useState(0)
 
     const today = new Date().toLocaleDateString('en-GB').split('/').reverse().join('-')
-
+    
+    const filterObj = {
+        checkIn: checkIn,
+        checkOut: checkOut,
+        bedrooms: bedrooms,
+        bathrooms: bathrooms,
+        guests: guests
+    }
 
 
     useEffect(() => {
