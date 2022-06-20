@@ -33,6 +33,8 @@ function SignupFormPage() {
 
         if(username.length > 50) errors.push('Username must be less than 50 characters')
 
+        if (password.length > 200) errors.push('Password must be less than 200 characters')
+
         if (!password.match(passR)) errors.push('Password must be 8 characters, include 1 letter, 1 number, and a special character')
 
 
